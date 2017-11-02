@@ -37,7 +37,7 @@ class Quotation extends CI_Controller {
         $this->load->model('event_model');
         $this->load->model('Payment_model');
         
-        echo 'setQuatation';
+        
         /*
 event_id:49
 camera_charges:130000
@@ -51,7 +51,7 @@ balance_amount:129991
                 'camera_charges',
                 'other', 'discount', 'total', 'pay_amount', 'balance_amount'));
 
-        echo '<tt><pre>'.var_export($form_data, TRUE).'</pre></tt>';
+        //echo '<tt><pre>'.var_export($form_data, TRUE).'</pre></tt>';
         //insert into quatation -> quatation_id
         $quatatonArray = array('camera_charges' => $form_data['camera_charges'],
             'other' => $form_data['other'],

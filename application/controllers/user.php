@@ -49,6 +49,14 @@ Class User extends CI_Controller {
         //redirect to relevant dashboard
         //redirect(base_url().'index.php/calendar');
        
+        
+        //search all event list 
+        $this->load->model('event_model');
+        $data['activeEventList'] = $this->event_model->get_all_active_events('closed');
+        //load latest 10 quatations 
+        
+        echo '<tt><pre>'.var_export($data, TRUE).'</pre></tt>';
+        
         $this->load->view('calendar_veiw');
         
         

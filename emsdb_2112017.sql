@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v8.55 
-MySQL - 5.5.5-10.1.21-MariaDB : Database - emsdb
+MySQL - 5.5.5-10.2.7-MariaDB : Database - emsdb
 *********************************************************************
 */
 
@@ -94,26 +94,28 @@ DROP TABLE IF EXISTS `event`;
 
 CREATE TABLE `event` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `event_date` varchar(25) DEFAULT NULL,
   `event_name` varchar(45) NOT NULL,
   `place` varchar(45) DEFAULT NULL,
   `starting_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL,
   `no_of_cams` int(11) DEFAULT NULL,
   `booked_or_not` varchar(45) NOT NULL,
+  `balance_amount` decimal(10,2) DEFAULT NULL,
   `customer_id` int(11) NOT NULL,
   `package_id` int(11) NOT NULL,
   `usercreated` int(11) DEFAULT NULL,
-  `timecreated` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `timecreated` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`,`event_name`),
   KEY `fk_event_customer1_idx` (`customer_id`),
   KEY `fk_event_package1_idx` (`package_id`),
   CONSTRAINT `fk_event_customer1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_event_package1` FOREIGN KEY (`package_id`) REFERENCES `package` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
 /*Data for the table `event` */
 
-insert  into `event`(`id`,`event_name`,`place`,`starting_time`,`end_time`,`no_of_cams`,`booked_or_not`,`customer_id`,`package_id`,`usercreated`,`timecreated`) values (1,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',1,1,NULL,'2017-10-31 05:33:03'),(2,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',1,1,NULL,'2017-10-31 05:33:03'),(3,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',1,1,NULL,'2017-10-31 05:33:03'),(4,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',1,1,NULL,'2017-10-31 05:33:03'),(5,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',1,1,NULL,'2017-10-31 05:33:03'),(6,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',1,1,NULL,'2017-10-31 05:33:03'),(7,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',1,1,NULL,'2017-10-31 05:33:03'),(8,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',1,1,NULL,'2017-10-31 05:33:03'),(9,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',1,1,NULL,'2017-10-31 05:33:03'),(10,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',1,1,NULL,'2017-10-31 05:33:03');
+insert  into `event`(`id`,`event_date`,`event_name`,`place`,`starting_time`,`end_time`,`no_of_cams`,`booked_or_not`,`balance_amount`,`customer_id`,`package_id`,`usercreated`,`timecreated`) values (1,NULL,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',NULL,1,1,NULL,'2017-10-31 05:33:03'),(2,NULL,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',NULL,1,1,NULL,'2017-10-31 05:33:03'),(3,NULL,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',NULL,1,1,NULL,'2017-10-31 05:33:03'),(4,NULL,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',NULL,1,1,NULL,'2017-10-31 05:33:03'),(5,NULL,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',NULL,1,1,NULL,'2017-10-31 05:33:03'),(6,NULL,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',NULL,1,1,NULL,'2017-10-31 05:33:03'),(7,NULL,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',NULL,1,1,NULL,'2017-10-31 05:33:03'),(8,NULL,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',NULL,1,1,NULL,'2017-10-31 05:33:03'),(9,NULL,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',NULL,1,1,NULL,'2017-10-31 05:33:03'),(10,NULL,'Ruwan doratuwa','Dompe','16:30:00','18:30:00',2,'booked',NULL,1,1,NULL,'2017-10-31 05:33:03'),(12,'2017-10-31','sdsd','sdsds','04:45:00','04:45:00',5,'pending',NULL,1,1,0,'2017-10-31 09:50:05'),(13,'2017-11-02','xx','yy','04:45:00','04:55:00',5,'pending',NULL,1,2,1,'2017-10-31 10:24:27'),(14,'2017-11-02','xx','yy','04:45:00','04:55:00',5,'pending',NULL,1,2,1,'2017-10-31 10:28:52'),(15,'2017-11-02','xx','yy','04:45:00','04:55:00',5,'pending',NULL,1,2,1,'2017-10-31 10:29:25'),(16,'2017-10-07','sdas','asdasd','04:45:00','04:15:00',3,'pending',NULL,1,1,1,'2017-10-31 13:58:30'),(17,'2017-10-06','sadasd','sadasd','04:45:00','04:58:00',5,'pending',NULL,1,1,1,'2017-10-31 14:07:24'),(18,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 10:16:44'),(19,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 11:06:45'),(20,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 11:13:20'),(21,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 11:18:30'),(22,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 11:20:45'),(23,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 11:22:47'),(24,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 11:25:36'),(25,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 11:27:37'),(26,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 11:30:16'),(27,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 11:36:18'),(28,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 11:39:40'),(29,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 11:40:34'),(30,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 11:41:20'),(31,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 11:44:27'),(32,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 11:45:10'),(33,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 11:46:12'),(34,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 12:00:05'),(35,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 12:02:07'),(36,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 12:03:16'),(37,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 12:03:53'),(38,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 12:05:13'),(39,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 12:05:51'),(40,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 12:06:40'),(41,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 12:07:37'),(42,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 12:08:09'),(43,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 12:09:28'),(44,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 12:10:21'),(45,'2017-11-04','aaaa','dddd','04:54:00','04:51:00',5,'ending',NULL,1,1,1,'2017-11-02 12:12:45'),(46,'2017-11-03','sadsda','sadsadsa','04:45:00','05:59:00',5,'pending',NULL,1,2,1,'2017-11-02 12:28:23'),(47,'2017-11-03','sadsda','sadsadsa','04:45:00','05:59:00',5,'pending',NULL,1,2,1,'2017-11-02 12:32:28'),(48,'2017-11-02','aa','sdsds','04:54:00','05:54:00',5,'pending',NULL,1,1,1,'2017-11-02 17:11:16'),(49,'2017-11-02','aa','sdsds','04:54:00','05:54:00',5,'booked','129878.00',1,1,1,'2017-11-02 17:14:35'),(50,'2017-11-03','sadsad','dsadsadsad','12:12:00','12:05:00',5,'booked','-284621.00',1,1,1,'2017-11-02 17:40:10');
 
 /*Table structure for table `package` */
 
@@ -138,15 +140,17 @@ DROP TABLE IF EXISTS `payment`;
 
 CREATE TABLE `payment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` date DEFAULT NULL,
-  `payed` double DEFAULT NULL,
+  `paydate` timestamp NULL DEFAULT current_timestamp(),
+  `payment` decimal(10,2) DEFAULT NULL,
   `quotation_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_payment_quotation1_idx` (`quotation_id`),
   CONSTRAINT `fk_payment_quotation1` FOREIGN KEY (`quotation_id`) REFERENCES `quotation` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*Data for the table `payment` */
+
+insert  into `payment`(`id`,`paydate`,`payment`,`quotation_id`) values (1,'2017-11-02 17:21:49','1500.00',1),(2,'2017-11-02 17:40:22','15000.00',2),(3,'2017-11-02 17:41:18','23223.00',3),(4,'2017-11-02 17:42:06','23232.00',4),(5,'2017-11-02 17:46:23','233.00',5),(6,'2017-11-02 17:51:19','2323.00',6),(7,'2017-11-02 17:53:53','234423.00',7),(8,'2017-11-02 17:57:27','23423.00',8);
 
 /*Table structure for table `quotation` */
 
@@ -162,9 +166,11 @@ CREATE TABLE `quotation` (
   PRIMARY KEY (`id`),
   KEY `fk_quotation_event1_idx` (`event_id`),
   CONSTRAINT `fk_quotation_event1` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*Data for the table `quotation` */
+
+insert  into `quotation`(`id`,`camera_charges`,`other`,`discount`,`total`,`event_id`) values (1,130000,1500,122,'131378.00',49),(2,130000,155,552,'129603.00',50),(3,130000,2323,233,'132090.00',50),(4,130000,2323,23,'132300.00',50),(5,130000,2323,2323,'130000.00',50),(6,130000,223,44,'130179.00',50),(7,130000,234234,234234,'130000.00',50),(8,130000,32234,423432,'-261198.00',50);
 
 /*Table structure for table `user` */
 
@@ -191,26 +197,26 @@ insert  into `user`(`id`,`username`,`password`,`employee_id`,`user_type`) values
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SPInsertEventTran`(
-IN IN_event_name varchar(45),
-IN IN_place varchar(45),
-IN IN_starting_time time,
-IN IN_end_time time,
-IN IN_no_of_cams int,
-IN IN_booked_or_not varchar(45),
-IN IN_customer_id int,
-IN IN_package_id int
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `SPInsertEventTran`(
+IN IN_event_name varchar(45),
+IN IN_place varchar(45),
+IN IN_starting_time time,
+IN IN_end_time time,
+IN IN_no_of_cams int,
+IN IN_booked_or_not varchar(45),
+IN IN_customer_id int,
+IN IN_package_id int
 )
-BEGIN
- 
-	iNSERT iNTO event(event_name,place,starting_time,end_time,no_of_cams,booked_or_not,customer_id,package_id)
-			values (IN_event_name,IN_place,IN_starting_time,IN_end_time,IN_no_of_cams,IN_booked_or_not,
-				IN_customer_id,IN_package_id);
-	insert into quotation (camera_charges,other,discount,event_id)
-		select ev.no_of_cams*pg.charge_per_cam ,null,null,ev.id
-		 from event ev
-		inner join package pg on ev.package_id=pg.id
-		where ev.id=(select max(id) from event);
+BEGIN
+ 
+	iNSERT iNTO event(event_name,place,starting_time,end_time,no_of_cams,booked_or_not,customer_id,package_id)
+			values (IN_event_name,IN_place,IN_starting_time,IN_end_time,IN_no_of_cams,IN_booked_or_not,
+				IN_customer_id,IN_package_id);
+	insert into quotation (camera_charges,other,discount,event_id)
+		select ev.no_of_cams*pg.charge_per_cam ,null,null,ev.id
+		 from event ev
+		inner join package pg on ev.package_id=pg.id
+		where ev.id=(select max(id) from event);
 END */$$
 DELIMITER ;
 
