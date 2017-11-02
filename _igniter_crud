@@ -1,0 +1,11 @@
+========insert into===============
+$data = array(
+        'title' => 'My title',
+        'name' => 'My Name',
+        'date' => 'My date'
+);
+
+$this->db->insert('mytable', $data);
+
+
+
