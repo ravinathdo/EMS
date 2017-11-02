@@ -36,19 +36,32 @@ class Quotation extends CI_Controller {
         $this->load->model('quotation_model');
         $this->load->model('event_model');
         $this->load->model('Payment_model');
-        $form_data = $this->quotation_model->array_from_post('event_id', 'camera_charges', 'other', 'discount', 'total', 'pay_amount', 'balance_amount');
+        
+        echo 'setQuatation';
+        /*
+event_id:49
+camera_charges:130000
+other:11
+discount:15
+total:129996
+pay_amount:5
+balance_amount:129991
+         *          */
+        $form_data = $this->quotation_model->array_from_post(array('event_id',
+                'camera_charges',
+                'other', 'discount', 'total', 'pay_amount', 'balance_amount'));
 
-
+        echo '<tt><pre>'.var_export($form_data, TRUE).'</pre></tt>';
         //insert into quatation -> quatation_id
-        $quatatonArray = array('camera_charges' => $form_data['$form_data'],
+        $quatatonArray = array('camera_charges' => $form_data['camera_charges'],
             'other' => $form_data['other'],
             'discount' => $form_data['discount'],
-            'total' => $form_data['total']
+            'total' => $form_data['total'],
+            'event_id' => $form_data['event_id']
         );
 
+        
         $qid = $this->quotation_model->setBooking($quatatonArray);
-
-
         //insert intp paymant 
         $paymentArray = array('payment' => $form_data['pay_amount'],
             'quotation_id' => $qid);
@@ -57,11 +70,30 @@ class Quotation extends CI_Controller {
         //update event table (booked_or_not,balance_amount)
         $eventArray = array('booked_or_not' => 'booked',
             'balance_amount' => $form_data['balance_amount']);
-        $this->event_model->update_event($eventArray);
-
+        $this->event_model->update_event($eventArray, $form_data['event_id']);
 
         
-        $this->load->view('event_insertview', $data);
+        $data = array();
+        
+        
+        //data preparing to print quatation 
+        /*
+        Quatatoion ID
+         * Evant ID
+         * Customer Name , Address , Telephome
+         * Number of cams
+         * Total Amount
+         * Discount
+         * Sub Total
+        */
+        //get event by ID
+        $data['eventData'] = $this->event_model->getById($form_data['event_id']);
+        $data['quatationData'] = $this->quotation_model->getById($qid);
+
+        //echo '-------------------<br>';
+       // echo '<tt><pre>'.var_export($data, TRUE).'</pre></tt>';
+        
+        $this->load->view('quotation_receipt', $data);
     }
 
     public function generate_quotation() {
@@ -80,7 +112,6 @@ class Quotation extends CI_Controller {
         $mdata['other'] = $_POST['other'];
         $mdata['discount'] = $_POST['discount'];
         $mdata['event_id'] = $_POST['event_id'];
-
 
         $res = $this->quotation_model->update_info($mdata, $_POST['id']);
 

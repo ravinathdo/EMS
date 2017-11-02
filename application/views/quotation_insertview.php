@@ -41,7 +41,7 @@
                     <?php echo form_open('quotation/setQuatation', 'class="form-horizontal"'); ?>
                     <div class="row" ng-app="myApp" ng-controller="myCtrl" ng-init="init()">
                         <div class="col-md-4"><h2>Event No: <?= $event_id ?></h2>
-                            <input type="hidden" name="event_id" /></div>
+                            <input type="hidden" name="event_id" value="<?= $event_id ?>" /></div>
                         
                         <div class="col-md-8">
 

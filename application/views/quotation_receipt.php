@@ -45,15 +45,71 @@
 
                     <h2>Event Details Form</h2><br>
 
-                        <?php echo form_open('event/insert_newevent_db');?>
-                        <div class="row">
-                            <div class="col-md-5">
+                    <?php echo form_open('event/insert_newevent_db'); ?>
+                    <div class="row">
+                        <div class="col-md-3">
+                        </div>
+
+                        <div class="col-md-6">
+                                  <div id="print">  
+                                <table class="table">
+
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="4"><h3>Event Quatation [<?= $eventData['event_id'] ?>]</h3></td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td><b>Event Name</b></td>
+                                            <td><?= $eventData['event_name'] ?></td>
+                                            <td><b>Place</b></td>
+                                            <td><?= $eventData['place'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Start Time</b></td>
+                                            <td><?= $eventData['starting_time'] ?></td>
+                                            <td><b>End Time</b></td>
+                                            <td><?= $eventData['end_time'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>No Of Cams</b></td>
+                                            <td><?= $eventData['no_of_cams'] ?></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Cam Charges</b></td>
+                                            <td><?= $quatationData['camera_charges'] ?></td>
+                                            <td><b>Other Amount</b></td>
+                                            <td><?= $quatationData['other'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Discount</b></td>
+                                            <td><?= $quatationData['discount'] ?></td>
+                                            <td><b>Total Amount</b></td>
+                                            <td><?= $quatationData['total'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td><button onclick="printDiv('print')">Print</button></td>
+                                            <td><?= $eventData['timecreated'] ?></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
 
-                            <div class="col-md-7">
-                            </div>
                         </div>
-                    <?php echo form_close();?>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                    <?php echo form_close(); ?>
 
 
 
@@ -207,5 +263,17 @@
         });
 
     </script>
+    
+    
+    
+    <script type="text/javascript">
+   function printDiv(divId) {
+       var printContents = document.getElementById(divId).innerHTML;
+       var originalContents = document.body.innerHTML;
+       document.body.innerHTML = "<html><head><title></title></head><body>" + printContents + "</body>";
+       window.print();
+       document.body.innerHTML = originalContents;
+   }
+</script>
 
 </html>
