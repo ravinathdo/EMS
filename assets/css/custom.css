@@ -1,0 +1,8 @@
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus {
+    color: #777;
+}
+
+.social .fa-facebook:hover {
+    color: #4060A5;
+}

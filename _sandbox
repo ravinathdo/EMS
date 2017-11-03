@@ -1,0 +1,93 @@
+adm@gmail.com -> a
+
+https://www.rollapp.com
+
+http://seiyria.com/bootstrap-slider/
+
+
+if ($this->session->userdata('userbean')) {
+                $userbean = $this->session->userdata('userbean');
+            } else {
+                //if invalid session user get redirect to login
+                header("Location:" . site_url('Login_Controller/logout'));
+            }
+
+ <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+
+
+ <tbody>
+                <?php
+                if ($cdsAccList != FALSE) {
+                    foreach ($cdsAccList as $rows) {
+                        ?>
+                        <tr>
+                            <td><?= $rows->cdsaccid; ?></td>
+                            <td><?= $rows->userid; ?></td>
+                            <td><?= $rows->cdsaccno; ?></td>
+                            <td><?= $rows->opendate; ?></td>
+                        </tr>
+
+                    <?php
+                    }
+                }
+                ?>
+        </tbody>
+
+
+
+ <div class="panel panel-primary">
+                        <div class="panel-heading">Ticket</div>
+                        <div class="panel-body"></div>
+                    </div>
+
+
+
+
+user             - ttt - a [86f7e437faa5a7fce15d1ddcb9eaeaea377667b8]
+business_analyst - ba  - a [86f7e437faa5a7fce15d1ddcb9eaeaea377667b8]
+
+
+//calender
+<input type="text" required="" class="form-control datepick" name="effectdate" id="effectdate" ng-model="calHisDate" placeholder="YYYY-MM-DD"/>
+
+
+
+
+
+//login data session 
+//echo '<tt><pre>'.var_export($response, TRUE).'</pre></tt>';
+      //login successful?
+      if ($response) {
+        //yes, then create the session
+        $session_array = array(
+          'userid'    => $response[0]['id'],
+          'name'      => $response[0]['name'],
+          'username'  => $response[0]['username'],
+          'logged_id' => true 
+        );
+
+        $this->session->set_userdata($session_array);
+=====================
+
+
+
+<div class="row">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-7"></div>
+                    </div>
+=====================
