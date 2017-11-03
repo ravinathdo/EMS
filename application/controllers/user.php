@@ -55,9 +55,9 @@ Class User extends CI_Controller {
         $data['activeEventList'] = $this->event_model->get_all_active_events('closed');
         //load latest 10 quatations 
         
-        echo '<tt><pre>'.var_export($data, TRUE).'</pre></tt>';
+        echo '<tt><pre>'.var_export($data['activeEventList'], TRUE).'</pre></tt>';
         
-        $this->load->view('calendar_veiw');
+        $this->load->view('calendar_veiw',$data);
         
         
       } else {
