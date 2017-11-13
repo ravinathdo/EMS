@@ -10,9 +10,10 @@ class Quotation_model extends CI_Model {
     public function get_all_quotation() {
         $this->db->select('*');
         $this->db->from('quotation');
-        $this->db->order_by("id", "desc");;
+        $this->db->order_by("id", "desc");
+        ;
         $query = $this->db->get();
-        
+
         return $query->result();
     }
 
@@ -32,9 +33,9 @@ class Quotation_model extends CI_Model {
     }
 
     public function setBooking($param) {
-        $this->db->insert('quotation',$param);
+        $this->db->insert('quotation', $param);
         $insert_id = $this->db->insert_id();
-        return $insert_id;//quatation id
+        return $insert_id; //quatation id
     }
 
     public function camera_charge($id) {
@@ -51,6 +52,37 @@ class Quotation_model extends CI_Model {
         return $this->db->insert('quotation', $qqdata);
     }
 
+    public function getEventFromQuataionID($param) {
+        /*
+          SELECT event.* FROM event
+          INNER JOIN quotation
+          ON event.id = quotation.event_id
+          WHERE quotation.id = 10
+         * 
+         */
+        $this->db->select('event.*');
+        $this->db->from('quotation');
+        $this->db->join('quotation', 'event.id = quotation.event_id');
+        $where = " event.booked_or_not = 'booked' AND quotation.id = " + $param;
+        $this->db->where($where);
+
+        $query = $this->db->get();
+
+        $result = $query->result();
+        if ($result) {
+            return $result;
+        } else {
+            return FALSE;
+        }
+    }
+
+    
+    
+    public function quotationbalanceUpdate($param) {
+        
+    }
+    
+    
     public function call_sp() {
         // $query = $this->db->query("call SPInsertEventTran()");
         // return $query->result();

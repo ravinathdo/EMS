@@ -36,6 +36,7 @@ class Event extends CI_Controller {
         if ($this->session->userdata('logged_id')) {
             //it is valid login
             $data['event_list'] = $this->event_model->upcoming_events();
+            //echo '<tt><pre>'.var_export($data['event_list'], TRUE).'</pre></tt>';
             $this->load->view('event_view', $data);
         } else {
             //no direct access

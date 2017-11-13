@@ -43,7 +43,7 @@
                 <!-- Main content -->
                 <section class="content">
 
-                    <h2>Event Details Form</h2><br>
+                    <h2>Event Quotation</h2><br>
 
                     <?php echo form_open('event/insert_newevent_db'); ?>
                     <div class="row">
@@ -56,7 +56,7 @@
 
                                     <tbody>
                                         <tr>
-                                            <td colspan="4"><h3>Event Quatation [<?= $eventData['event_id'] ?>]</h3></td>
+                                            <td colspan="4"><h3>Event Quotation [<?= $eventData['id'] ?>]</h3></td>
                                             
                                         </tr>
                                         <tr>

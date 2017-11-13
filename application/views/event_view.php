@@ -76,7 +76,7 @@
         <tbody>
         <tr>
           <td><?php echo $ev_key->event_name; ?></td>
-          <td><?php echo $ev_key->date; ?></td>
+          <td><?php echo $ev_key->event_date; ?></td>
           <td><?php echo $ev_key->place; ?></td>
           <td><?php echo $ev_key->starting_time; ?></td>
           <td><?php echo $ev_key->end_time; ?></td>
