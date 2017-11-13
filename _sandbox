@@ -91,3 +91,18 @@ business_analyst - ba  - a [86f7e437faa5a7fce15d1ddcb9eaeaea377667b8]
                         <div class="col-md-7"></div>
                     </div>
 =====================
+
+$this->db->select('*');
+  $this->db->from('cal_history');
+  $where = " effectdate = " . $effectdate;
+  $this->db->where($where);
+  $query = $this->db->get();
+
+  $result = $query->result();
+  if ($result) {
+  return $result;
+  } else {
+  return FALSE;
+  }
+
+==================

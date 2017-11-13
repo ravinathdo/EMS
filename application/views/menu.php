@@ -44,6 +44,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url(); ?>payment/list_quatations"><i class="fa fa-circle-o"></i> List Quotations</a></li>
                     <li><a href="<?php echo base_url(); ?>index.php/payment/add_new_payment"><i class="fa fa-circle-o"></i> New Payment</a></li>
                     <li><a href="<?php echo base_url(); ?>index.php/payment/index"><i class="fa fa-circle-o"></i> View Payments</a></li>
                 </ul>

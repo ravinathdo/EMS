@@ -24,3 +24,6 @@
 	<script src="<?php echo base_url();?>template/plugins/datepicker/bootstrap-datepicker.js"></script>
 	<!-- Timepicker -->
 	<script src="<?php echo base_url();?>template/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+	
+        
+        <script src="<?php echo base_url();?>js/jquery.dataTables.min.js"></script>

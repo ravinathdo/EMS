@@ -17,6 +17,26 @@ class Quotation_model extends CI_Model {
         return $query->result();
     }
 
+    public function get_quotation_for_payment() {
+        /*
+          SELECT quotation.*,event.event_name,event.booked_or_not FROM quotation
+          INNER JOIN event
+          ON quotation.event_id = event.id
+         *  */
+        $this->db->select('quotation.*,event.event_name,event.booked_or_not,event.id AS eid');
+        $this->db->from('quotation');
+        $this->db->join('event','quotation.event_id = event.id');
+        
+        $query = $this->db->get();
+
+        $result = $query->result();
+        if ($result) {
+            return $result;
+        } else {
+            return FALSE;
+        }
+    }
+
     function get_new() { //
         $Event = new stdClass();
         $Event->id = '';
@@ -61,9 +81,9 @@ class Quotation_model extends CI_Model {
          * 
          */
         $this->db->select('event.*');
-        $this->db->from('quotation');
+        $this->db->from('event');
         $this->db->join('quotation', 'event.id = quotation.event_id');
-        $where = " event.booked_or_not = 'booked' AND quotation.id = " + $param;
+        $where = "event.booked_or_not = 'booked' AND quotation.id = " . $param;
         $this->db->where($where);
 
         $query = $this->db->get();
@@ -76,13 +96,10 @@ class Quotation_model extends CI_Model {
         }
     }
 
-    
-    
     public function quotationbalanceUpdate($param) {
         
     }
-    
-    
+
     public function call_sp() {
         // $query = $this->db->query("call SPInsertEventTran()");
         // return $query->result();
