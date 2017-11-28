@@ -44,7 +44,9 @@
                 <section class="content">
 
                     <h2>Event Creation</h2><br>
-
+<?php if(isset($msg)){
+     echo $msg;
+}?>
                     <?php echo form_open('event/insert_newevent_db'); ?>
                     <div class="row">
                         <div class="col-md-5">
@@ -108,7 +110,7 @@
                                 <select class="form-control" id="package_package" name="package_id">
                                     <option value="0" disabled selected>--Select Package--</option>
                                     <?php foreach ($packages as $package) { ?>
-                                        <option value = "<?php echo $package->id; ?>|<?php echo $package->charge_per_cam; ?>|<?php echo $package->package; ?> "><?php echo $package->package; ?></option>
+                                        <option value = "<?php echo $package->id; ?>|<?php echo $package->charge_per_cam; ?>|<?php echo $package->package; ?>|<?php echo $package->no_of_cameras; ?>"><?php echo $package->package; ?></option>
                                     <?php } ?> 
                                 </select>
                             </div>

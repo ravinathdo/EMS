@@ -21,8 +21,6 @@ class Event_model extends CI_Model {
         }
         return $data;
     }
-    
-    
 
     public function setEvent($param) {
         $this->db->insert('event', $param);
@@ -38,8 +36,7 @@ class Event_model extends CI_Model {
         $result = $query->result();
         return $result;
     }
-    
-    
+
     public function get_all_active_events($status) {
         $this->db->select('*');
         $this->db->from('event');
@@ -124,6 +121,16 @@ class Event_model extends CI_Model {
         return $edata;
     }
 
+    public function getPackageCamForDate($date, $packageID) {
+        // SELECT COUNT(no_of_cams) FROM event WHERE event_date = '2017-10-31' AND package_id = 1
+        $this->db->select('COUNT(no_of_cams) as no_of_cams');
+        $this->db->from('event');
+        $this->db->where('event.event_date', $date);
+        $this->db->where('event.package_id', $packageID);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function insert_event_to_db($evdata) {
 
         $this->db->insert('event', $evdata);
@@ -161,7 +168,7 @@ class Event_model extends CI_Model {
          */
         $this->db->select('event.*,package.description,package.charge_per_cam');
         $this->db->from('event');
-        $this->db->join('package','event.package_id = package.id');
+        $this->db->join('package', 'event.package_id = package.id');
         $this->db->where('event.id', $id);
         $query = $this->db->get();
         return $query->row_array();

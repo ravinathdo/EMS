@@ -99,38 +99,120 @@ class Event extends CI_Controller {
                 'end_time',
                 'package_id', 'no_of_cams'));
 
-            $formData['booked_or_not'] = 'pending';
 
-            $formData['usercreated'] = $this->session->userdata('userid');
+            // echo 'xxx';
+            //validate date-time
+            $dtTimeFlag = $this->validateDateTime($formData['event_date'], $formData['starting_time'], $formData['end_time']);
+            //validate available cams on package for the day
+            // echo 'xxx';
+
+            $cmCount = 0;
+            $cmPkg = $this->event_model->getPackageCamForDate($formData['event_date'], $formData['package_id']);
+            if ($cmPkg != FALSE) {
+                foreach ($cmPkg as $rows) {
+                    $cmCount = $rows->no_of_cams;
+                }
+            }
+
+            //get package cams
             $package_id = $formData['package_id'];
 
-            $explode = explode("|", $package_id);
 
-            $data['charge_per_cam'] = $explode[1];
-            $formData['package_id'] = $explode[0];
+            if ($dtTimeFlag) {
 
-            echo '<tt><pre>' . var_export($formData, TRUE) . '</pre></tt>';
 
-            $event_id = $this->event_model->insert_event_to_db($formData);
+
+
+                $formData['booked_or_not'] = 'pending';
+                $formData['usercreated'] = $this->session->userdata('userid');
+                $package_id = $formData['package_id'];
+
+                $explode = explode("|", $package_id);
+
+                $data['charge_per_cam'] = $explode[1];
+                $formData['package_id'] = $explode[0];
+                $noofcam = $explode[3];
+
+
+                $freCam = $noofcam - $cmCount;
+
+                if ($formData['no_of_cams'] <= $freCam) {
+
+                   // echo '<tt><pre>' . var_export($formData, TRUE) . '</pre></tt>';
+
+                    $event_id = $this->event_model->insert_event_to_db($formData);
 
 //			if ($res) {
 //				$insertResponse = array();
 //				$insertResponse['response'] = array('res' => TRUE);
 //				echo json_encode($insertResponse);
 //			}	
-            //quatation data
-            $data['package_name'] = $explode[2];
-            $data['no_of_cams'] = $formData['no_of_cams'];
-            $data['camera_charges'] = $data['charge_per_cam'] * $formData['no_of_cams'];
-            $data['event_id'] = $event_id;
+                    //quatation data
+                    $data['package_name'] = $explode[2];
+                    $data['no_of_cams'] = $formData['no_of_cams'];
+                    $data['camera_charges'] = $data['charge_per_cam'] * $formData['no_of_cams'];
+                    $data['event_id'] = $event_id;
 
 
-            echo '<tt><pre>' . var_export($data, TRUE) . '</pre></tt>';
+                    //echo '<tt><pre>' . var_export($data, TRUE) . '</pre></tt>';
 
-            $this->load->view('quotation_insertview', $data);
+                    $this->load->view('quotation_insertview', $data);
+                } else {
+                    //echo 'ssss';
+                    //invalid from date and to date
+                    $data['msg'] = '<p class="bg-danger">Sorry Package cam exceeded</p>';
+
+
+                    $date = $this->uri->segment(3);
+                    $data['date'] = array('date' => $date);
+                    $data['packages'] = $this->package_model->get_all_package();
+                    // echo '<tt><pre>' . var_export($data['packages'], TRUE) . '</pre></tt>';
+                    $data['customers'] = $this->customer_model->get_all_customer();
+                    //list all event list
+                    $this->load->model('event_model');
+                    $eventList = $this->event_model->get_all_events();
+                    $data['eventList'] = $eventList;
+                    //echo '<tt><pre>'.var_export($eventList, TRUE).'</pre></tt>';
+                    
+                     $this->load->view('event_insertview', $data);
+                }
+            } else {
+                //echo 'ssss';
+                //invalid from date and to date
+                $data['msg'] = '<p class="bg-danger">Invalid Date Time Found</p>';
+
+
+                $date = $this->uri->segment(3);
+                $data['date'] = array('date' => $date);
+                $data['packages'] = $this->package_model->get_all_package();
+                // echo '<tt><pre>' . var_export($data['packages'], TRUE) . '</pre></tt>';
+                $data['customers'] = $this->customer_model->get_all_customer();
+                //list all event list
+                $this->load->model('event_model');
+                $eventList = $this->event_model->get_all_events();
+                $data['eventList'] = $eventList;
+                //echo '<tt><pre>'.var_export($eventList, TRUE).'</pre></tt>';
+
+
+
+                $this->load->view('event_insertview', $data);
+            }
         } else {
             //no direct access
             redirect(base_url() . 'index.php/login');
+        }
+    }
+
+    function getTime($ymd, $hi) {
+        return strtotime($ymd . " " . $hi);
+    }
+
+    public function validateDateTime($dt, $starttime, $endtime) {
+        if ($this->getTime($dt, $starttime) < $this->getTime($dt, $endtime)) {
+            //echo "Ok!";
+            return TRUE;
+        } else {
+            return FALSE;
         }
     }
 
@@ -140,8 +222,8 @@ class Event extends CI_Controller {
 
         //quatation data
         $data['charge_per_cam'] = $eventData[''];
-        $data['package_name'] =  $eventData[''];
-        $data['no_of_cams'] =  $eventData[''];
+        $data['package_name'] = $eventData[''];
+        $data['no_of_cams'] = $eventData[''];
         $data['total'] = $eventData['charge_per_cam'] * $eventData['no_of_cams'];
         $data['event_id'] = $event_id;
 
