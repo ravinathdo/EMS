@@ -17,6 +17,26 @@ class Quotation_model extends CI_Model {
         return $query->result();
     }
 
+    
+    
+      public function get_lmit_quotation_for_payment() {
+          $this->db->select('quotation.*,event.event_name,event.booked_or_not,event.id AS eid,event.status status');
+        $this->db->from('quotation');
+        $this->db->join('event','quotation.event_id = event.id');
+        
+        $this->db->limit(10);
+        $query = $this->db->get();
+
+        $result = $query->result();
+        if ($result) {
+            return $result;
+        } else {
+            return FALSE;
+        }
+      }
+    
+    
+    
     public function get_quotation_for_payment() {
         /*
           SELECT quotation.*,event.event_name,event.booked_or_not FROM quotation

@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('no direct script access allowed');
 
-class Package extends CI_Controller {
+class Team extends CI_Controller {
 
     function __construct() {
         parent::__construct();
@@ -12,12 +12,111 @@ class Package extends CI_Controller {
         $this->load->model('event_model');
         $this->load->model('employee_model');
     }
-    
-    
-    public function teamForTheEvent($eid) {
+
+    public function loadTeamForTheEvent($eid,$edate) {
         $data = array();
-        $this->load->view('',$data);
+        //get position 
+        $arrList = $this->team_model->getEmpPositionListForDay($edate);
+        $newArr = array();
+        $i = 0;
+        if ($arrList != FALSE) {
+            foreach ($arrList as $rows) {
+                $newArr[$i] = $rows->employee_id;
+                $i++;
+            }
+        }else{
+         $newArr = array(0);   
+        }
+        
+      
+        
+                       //echo '<tt><pre>' . var_export($arrList, TRUE) . '</pre></tt>';
+
+                       
+        $data['event_date'] = $edate;
+        $data['event_id'] = $eid;
+
+        $data['AUDIO_OPERATER_LIST'] = $this->team_model->getFreePositionEmpList($eid, 'AUDIO_OPERATER',$newArr);
+        $data['CAMERAMAN_LIST'] = $this->team_model->getFreePositionEmpList($eid, 'CAMERAMAN',$newArr);
+        $data['CAMERA_ASSISTANT_LIST'] = $this->team_model->getFreePositionEmpList($eid, 'CAMERA_ASSISTANT',$newArr);
+        $data['CUSTOMER_OFFICER_LIST'] = $this->team_model->getFreePositionEmpList($eid ,'CUSTOMER_OFFICER',$newArr);
+        $data['FLOW_MANAGER_LIST'] = $this->team_model->getFreePositionEmpList($eid, 'FLOW_MANAGER',$newArr);
+        $data['MANAGER_LIST'] = $this->team_model->getFreePositionEmpList($eid, 'MANAGER',$newArr);
+        $data['SETUP_ENGINEER_LIST'] = $this->team_model->getFreePositionEmpList($eid, 'SETUP_ENGINEER',$newArr);
+        $data['TECHNICAL_ASSISTANT_LIST'] = $this->team_model->getFreePositionEmpList($eid, 'TECHNICAL_ASSISTANT',$newArr);
+        $data['VISION_OPERATER_LIST'] = $this->team_model->getFreePositionEmpList($eid, 'VISION_OPERATER',$newArr);
+
+       // echo '<tt><pre>' . var_export($data['AUDIO_OPERATER_LIST'], TRUE) . '</pre></tt>';
+        
+        
+        //get availiable team members for the event
+        $data['eventTeamList'] = $this->team_model->getAvailiiableTeamForTheEvent($eid);
+                
+        
+        
+        $this->load->view('team_manage',$data);
     }
+    
+    
+    
+    
+    
+
+    public function teamForTheEvent() {
+       // echo 'post';
+       $inputArr = $this->team_model->array_from_post(array("event_id","position_id","event_date","employee_id"));
+       //echo '<tt><pre>' . var_export($inputArr, TRUE) . '</pre></tt>';
+       $stat = $this->team_model->setEmployeeEvent($inputArr);
+       if($stat){
+           
+           
+         //////////////////
+         $arrList = $this->team_model->getEmpPositionListForDay($inputArr['event_date']);
+        $newArr = array();
+        $i = 0;
+        if ($arrList != FALSE) {
+            foreach ($arrList as $rows) {
+                $newArr[$i] = $rows->employee_id;
+                $i++;
+            }
+        }else{
+         $newArr = array(0);   
+        }
+
+        $data['event_date'] = $inputArr['event_date'];
+        $data['event_id'] = $inputArr['event_id'];
+        $eid = $inputArr['event_id'];
+
+        $data['AUDIO_OPERATER_LIST'] = $this->team_model->getFreePositionEmpList($eid, 'AUDIO_OPERATER',$newArr);
+        $data['CAMERAMAN_LIST'] = $this->team_model->getFreePositionEmpList($eid, 'CAMERAMAN',$newArr);
+        $data['CAMERA_ASSISTANT_LIST'] = $this->team_model->getFreePositionEmpList($eid, 'CAMERA_ASSISTANT',$newArr);
+        $data['CUSTOMER_OFFICER_LIST'] = $this->team_model->getFreePositionEmpList($eid ,'CUSTOMER_OFFICER',$newArr);
+        $data['FLOW_MANAGER_LIST'] = $this->team_model->getFreePositionEmpList($eid, 'FLOW_MANAGER',$newArr);
+        $data['MANAGER_LIST'] = $this->team_model->getFreePositionEmpList($eid, 'MANAGER',$newArr);
+        $data['SETUP_ENGINEER_LIST'] = $this->team_model->getFreePositionEmpList($eid, 'SETUP_ENGINEER',$newArr);
+        $data['TECHNICAL_ASSISTANT_LIST'] = $this->team_model->getFreePositionEmpList($eid, 'TECHNICAL_ASSISTANT',$newArr);
+        $data['VISION_OPERATER_LIST'] = $this->team_model->getFreePositionEmpList($eid, 'VISION_OPERATER',$newArr);
+
+        //echo '<tt><pre>' . var_export($data['AUDIO_OPERATER_LIST'], TRUE) . '</pre></tt>';
+        
+        
+        //get availiable team members for the event
+        $data['eventTeamList'] = $this->team_model->getAvailiiableTeamForTheEvent($eid);
+                  
+         //////////////////  
+           
+           
+           
+          $data['msg'] = '<p class="bg-success">New Assiign Created</p>'; 
+       } else{
+          $data['msg'] = '<p class="bg-danger">Invalaid Data</p>'; 
+       }       
+               $this->load->view('team_manage',$data);
+
+    }
+    
+    
+    
     
 
     public function index() {

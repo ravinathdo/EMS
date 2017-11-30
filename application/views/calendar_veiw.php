@@ -61,37 +61,37 @@
 
                 <section class="col-lg-3 connectedSortable ui-sortable">
                     <br>
-                    <!--<img src="<?php //echo base_url(); ?>/assets/images/Videos-1-icon.png" alt="" style="width: 100px;height: 100px"/>-->
+                    <!--<img src="<?php //echo base_url();  ?>/assets/images/Videos-1-icon.png" alt="" style="width: 100px;height: 100px"/>-->
                     <b>Reminder</b>
 
                     <table class="table table-dark">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First Name</th>
-                                <th scope="col">Last Name</th>
-                                <th scope="col">Username</th>
+                                <th scope="col">#QID</th>
+                                <th scope="col">Event ID</th>
+                                <th scope="col">Total</th>
                             </tr>
                         </thead>
+
+
+
+
+
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td><button type="button" class="btn btn-primary btn-xs">Rs 1399</button></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td><button type="button" class="btn btn-primary btn-xs">Rs 4566</button></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                            <?php
+                            if ($quatatoinList != FALSE) {
+                                foreach ($quatatoinList as $rows) {
+                                    ?>
+                                    <tr>
+                                        <th scope="row"><?= $rows->id?></th>
+                                        <td><?= $rows->eid?></td>
+                                        <td><a class="btn btn-primary btn-xs" href="<?php echo base_url('payment/load_payment/'.$rows->id.'/'.$rows->eid);?>"> <?= $rows->total;?></a>
+
+                                    </tr>
+                                    <?php }
+                            }
+                            ?>
+                            
                         </tbody>
                     </table>
                 </section>
@@ -125,12 +125,13 @@
 
 
         </div>
-        <?php include 'application/views/footer.php' ?>
+<?php include 'application/views/footer.php' ?>
 
 
-<?php //echo '-------------------------<br>';
- //echo '<tt><pre>'.var_export($activeEventList, TRUE).'</pre></tt>';
-?>
+        <?php
+        //echo '-------------------------<br>';
+        //echo '<tt><pre>'.var_export($activeEventList, TRUE).'</pre></tt>';
+        ?>
 
         <script>
 
@@ -152,16 +153,16 @@ if ($activeEventList != FALSE) {
     foreach ($activeEventList as $rows) {
         ?>
 
-                                            {
-                                                title: '[<?php echo $rows->id; ?>] <?php echo $rows->event_name; ?>  ',
-                                                start: '<?php echo $rows->event_date; ?>',
-                                                url: 'http://google.com/',
-                                            },
+                                {
+                                    title: '[<?php echo $rows->id; ?>] <?php echo $rows->event_name; ?>  ',
+                                    start: '<?php echo $rows->event_date; ?>',
+                                    url: 'http://google.com/',
+                                },
         <?php
     }
 }
 ?>
-                                ]
+                    ]
                 });
 
             });

@@ -13,6 +13,13 @@ class Event_model extends CI_Model {
         return $Event;
     }
 
+    public function setEventStatusChange($eid) {
+        $this->db->set('booked_or_not', 'closed');
+        $this->db->where('id', $eid);
+        $this->db->update('event');
+        
+    }
+
     public function array_from_post($fields) {
         $data = array();
 
@@ -36,12 +43,9 @@ class Event_model extends CI_Model {
         $result = $query->result();
         return $result;
     }
-    
-    
-  
 
     public function get_all_active_events($status) {
-       // echo $status;
+        // echo $status;
         $this->db->select('*');
         $this->db->from('event');
         $where = "booked_or_not != '.$status.'";
@@ -52,11 +56,12 @@ class Event_model extends CI_Model {
         $result = $query->result();
         return $result;
     }
+
     public function get_all_active_events_booked($status) {
-       // echo $status;
+        // echo $status;
         $this->db->select('*');
         $this->db->from('event');
-        $where = "booked_or_not = '".$status."'";
+        $where = "booked_or_not = '" . $status . "'";
 //        echo $where;
         $this->db->where($where);
         $this->db->order_by("id", "desc");

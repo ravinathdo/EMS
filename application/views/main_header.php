@@ -14,12 +14,13 @@
       <table style="color: white" width="100%">      <!-- <? base_url();?>   -->
             <tr>
                 <td>
-                    <!--<h3>Video Event Management System </h3>-->
-                    <h3>***</h3>
+                    <h3>Video Event Management System </h3>
+<!--                    <h3>***</h3>-->
                 </td>
                 <td align="right" >
                       <i class="fa fa-user " aria-hidden="true">
                           <?php echo $this->session->userdata('name'); ?>
+                         [<?php echo $this->session->userdata('user_type'); ?>]
                           </i>
                     <a href="<?php echo base_url(); ?>index.php/calendar">
                         <i class="fa fa-home " aria-hidden="true"> Home </i>

@@ -35,7 +35,7 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-video-camera"></i> Event</a></li>
+                        <li><a href="#"><i class="fa fa-video-camera"></i> Team Manage </a></li>
                         <li><a href="#">New Event</a></li>
                     </ol>
                 </section>
@@ -43,8 +43,268 @@
                 <!-- Main content -->
                 <section class="content">
                     <div class="row">
-                        <div class="col-md-5">5</div>
-                        <div class="col-md-7">7</div>
+                        <?php
+                        if (isset($msg)) {
+                            echo $msg;
+                        }
+                        ?>
+                        <div class="col-md-5">
+                            
+                            <h2>Event : <?= $event_id;?> [<?= $event_date; ?>]</h2>
+                            
+                            <?php echo form_open('team/teamForTheEvent'); ?>
+                            <div class="form-group">
+                                <input type="hidden" name="position_id" value="AUDIO_OPERATER" />
+                                <input type="hidden" name="event_date" value="<?= $event_date; ?>" />
+                                <input type="hidden" name="event_id" value="<?= $event_id; ?>" />
+                                <label for="exampleInputEmail1">AUDIO OPERATOR</label>
+                                <select class="form-control" required="" name="employee_id">
+                                    <option value="">--select employee--</option>
+                                    <?php
+                                    if ($AUDIO_OPERATER_LIST != FALSE) {
+                                        foreach ($AUDIO_OPERATER_LIST as $rows) {
+                                            ?>
+                                            <option value="<?= $rows->id; ?>"> <?= $rows->name; ?></option>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Add AUDIO OPERATOR</button>
+                            </div>
+                            <?php echo form_close(); ?>
+
+                            <?php echo form_open('team/teamForTheEvent'); ?>
+                            <div class="form-group">
+                                <input type="hidden" name="position_id" value="CAMERAMAN" />
+                                <input type="hidden" name="event_date" value="<?= $event_date; ?>" />
+                                <input type="hidden" name="event_id" value="<?= $event_id; ?>" />
+                                <label for="exampleInputEmail1">CAMERAMAN</label>
+                                <select class="form-control" required="" name="employee_id">
+                                    <option value="">--select employee--</option>
+                                    <?php
+                                    if ($CAMERAMAN_LIST != FALSE) {
+                                        foreach ($CAMERAMAN_LIST as $rows) {
+                                            ?>
+                                            <option value="<?= $rows->id; ?>"> <?= $rows->name; ?></option>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Add CAMERAMAN</button>
+                            </div>
+
+                            <?php echo form_close(); ?>
+                            
+                            
+                            <?php echo form_open('team/teamForTheEvent'); ?>
+                            <div class="form-group">
+                                <input type="hidden" name="position_id" value="CAMERA_ASSISTANT" />
+                                <input type="hidden" name="event_date" value="<?= $event_date; ?>" />
+                                <input type="hidden" name="event_id" value="<?= $event_id; ?>" />
+                                <label for="exampleInputEmail1">CAMERA ASSISTANT</label>
+                                <select class="form-control" required="" name="employee_id">
+                                    <option value="">--select employee--</option>
+                                    <?php
+                                    if ($CAMERA_ASSISTANT_LIST != FALSE) {
+                                        foreach ($CAMERA_ASSISTANTR_LIST as $rows) {
+                                            ?>
+                                            <option value="<?= $rows->id; ?>"> <?= $rows->name; ?></option>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Add CAMERA ASSISTANT</button>
+                            </div>
+                            <?php echo form_close(); ?>
+                            <?php echo form_open('team/teamForTheEvent'); ?>
+                            <div class="form-group">
+                                <input type="hidden" name="position_id" value="CUSTOMER_OFFICER" />
+                                <input type="hidden" name="event_date" value="<?= $event_date; ?>" />
+                                <input type="hidden" name="event_id" value="<?= $event_id; ?>" />
+                                <label for="exampleInputEmail1">CUSTOMER OFFICER</label>
+                                <select class="form-control" required="" name="employee_id">
+                                    <option value="">--select employee--</option>
+                                    <?php
+                                    if ($CUSTOMER_OFFICER != FALSE) {
+                                        foreach ($CUSTOMER_OFFICER as $rows) {
+                                            ?>
+                                            <option value="<?= $rows->id; ?>"> <?= $rows->name; ?></option>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Add CUSTOMER OFFICER</button>
+                            </div>
+                            <?php echo form_close(); ?>
+                            
+                            <?php echo form_open('team/teamForTheEvent'); ?>
+                            <div class="form-group">
+                                <input type="hidden" name="position_id" value="FLOW_MANAGER" />
+                                <input type="hidden" name="event_date" value="<?= $event_date; ?>" />
+                                <input type="hidden" name="event_id" value="<?= $event_id; ?>" />
+                                <label for="exampleInputEmail1">FLOW MANAGER</label>
+                                <select class="form-control" required="" name="employee_id">
+                                    <option value="">--select employee--</option>
+                                    <?php
+                                    if ($FLOW_MANAGER != FALSE) {
+                                        foreach ($FLOW_MANAGER as $rows) {
+                                            ?>
+                                            <option value="<?= $rows->id; ?>"> <?= $rows->name; ?></option>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Add FLOW MANAGER</button>
+                            </div>
+                            <?php echo form_close(); ?>
+                            <?php echo form_open('team/teamForTheEvent'); ?>
+                            <div class="form-group">
+                                <input type="hidden" name="position_id" value="MANAGER" />
+                                <input type="hidden" name="event_date" value="<?= $event_date; ?>" />
+                                <input type="hidden" name="event_id" value="<?= $event_id; ?>" />
+                                <label for="exampleInputEmail1">MANAGER</label>
+                                <select class="form-control" required="" name="employee_id">
+                                    <option value="">--select employee--</option>
+                                    <?php
+                                    if ($MANAGER != FALSE) {
+                                        foreach ($MANAGER as $rows) {
+                                            ?>
+                                            <option value="<?= $rows->id; ?>"> <?= $rows->name; ?></option>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Add MANAGER</button>
+                            </div>
+                            <?php echo form_close(); ?>
+                            <?php echo form_open('team/teamForTheEvent'); ?>
+                            <div class="form-group">
+                                <input type="hidden" name="position_id" value="MANAGER" />
+                                <input type="hidden" name="event_date" value="<?= $event_date; ?>" />
+                                <input type="hidden" name="event_id" value="<?= $event_id; ?>" />
+                                <label for="exampleInputEmail1">MANAGER</label>
+                                <select class="form-control" required="" name="employee_id">
+                                    <option value="">--select employee--</option>
+                                    <?php
+                                    if ($MANAGER != FALSE) {
+                                        foreach ($MANAGER as $rows) {
+                                            ?>
+                                            <option value="<?= $rows->id; ?>"> <?= $rows->name; ?></option>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Add MANAGER</button>
+                            </div>
+                            <?php echo form_close(); ?>
+                            <?php echo form_open('team/teamForTheEvent'); ?>
+                            <div class="form-group">
+                                <input type="hidden" name="position_id" value="SETUP_ENGINEER" />
+                                <input type="hidden" name="event_date" value="<?= $event_date; ?>" />
+                                <input type="hidden" name="event_id" value="<?= $event_id; ?>" />
+                                <label for="exampleInputEmail1">SETUP ENGINEER</label>
+                                <select class="form-control" required="" name="employee_id">
+                                    <option value="">--select employee--</option>
+                                    <?php
+                                    if ($SETUP_ENGINEER != FALSE) {
+                                        foreach ($SETUP_ENGINEER as $rows) {
+                                            ?>
+                                            <option value="<?= $rows->id; ?>"> <?= $rows->name; ?></option>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Add SETUP ENGINEER</button>
+                            </div>
+                            <?php echo form_close(); ?>
+                            <?php echo form_open('team/teamForTheEvent'); ?>
+                            <div class="form-group">
+                                <input type="hidden" name="position_id" value="TECHNICAL_ASSISTANT" />
+                                <input type="hidden" name="event_date" value="<?= $event_date; ?>" />
+                                <input type="hidden" name="event_id" value="<?= $event_id; ?>" />
+                                <label for="exampleInputEmail1">TECHNICAL ASSISTANT</label>
+                                <select class="form-control" required="" name="employee_id">
+                                    <option value="">--select employee--</option>
+                                    <?php
+                                    if ($TECHNICAL_ASSISTANT != FALSE) {
+                                        foreach ($TECHNICAL_ASSISTANT as $rows) {
+                                            ?>
+                                            <option value="<?= $rows->id; ?>"> <?= $rows->name; ?></option>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Add TECHNICAL ASSISTANT</button>
+                            </div>
+                            <?php echo form_close(); ?>
+                            <?php echo form_open('team/teamForTheEvent'); ?>
+                            <div class="form-group">
+                                <input type="hidden" name="position_id" value="VISION_OPERATER" />
+                                <input type="hidden" name="event_date" value="<?= $event_date; ?>" />
+                                <input type="hidden" name="event_id" value="<?= $event_id; ?>" />
+                                <label for="exampleInputEmail1">VISION OPERATER</label>
+                                <select class="form-control" required="" name="employee_id">
+                                    <option value="">--select employee--</option>
+                                    <?php
+                                    if ($VISION_OPERATER != FALSE) {
+                                        foreach ($VISION_OPERATER as $rows) {
+                                            ?>
+                                            <option value="<?= $rows->id; ?>"> <?= $rows->name; ?></option>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Add VISION OPERATER</button>
+                            </div>
+                            <?php echo form_close(); ?>
+
+
+                        </div>
+                        <div class="col-md-7">
+
+
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Position</th>
+                                        <th>Employee Name</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Position</th>
+                                        <th>Employee Name</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <?php
+                                    if ($eventTeamList != FALSE) {
+                                        foreach ($eventTeamList as $rows) {
+                                            ?>
+                                            <tr>
+                                                <td><span class="btn btn-success btn-xs"><?= $rows->position_id; ?></span></td>
+                                                <td><?= $rows->name; ?></td>
+                                            </tr>
+
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+
+                        </div>
                     </div>
                 </section>
                 <!-- /.content -->

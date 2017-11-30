@@ -13,16 +13,32 @@ Class User extends CI_Controller {
     // Load database
     $this->load->model('user_model');
     $this->load->model('employee_model');
+    $this->load->model('quotation_model');
   }
 
   // Show login page
   public function index() {
-      $this->load->view('user_view');
+//      $this->load->view('user_view');
+      $this->load->view('index');
     }
   
+    
+    public function login() {
+      $this->load->view('user_view');
+        
+    }
+    
     public function test() {
         $this->load->view('template');
     }
+    
+    
+    
+    
+    
+    
+    
+    
 
   // Authenticate user
   public function verify_login() {
@@ -30,6 +46,8 @@ Class User extends CI_Controller {
     $username = $_POST['username'];
     $password = $_POST['password'];
       
+    $password = sha1($password);
+    //echo $password;
     //check whether username & password fields are empty
     if (!empty($username) && !empty($password)) {
       //it's not empty
@@ -44,6 +62,7 @@ Class User extends CI_Controller {
           'userid'    => $response[0]['id'],
           'name'      => $response[0]['name'],
           'username'  => $response[0]['username'],
+          'user_type'  => $response[0]['user_type'],
           'logged_id' => true 
         );
 
@@ -60,19 +79,25 @@ Class User extends CI_Controller {
         
         //echo '<tt><pre>'.var_export($data['activeEventList'], TRUE).'</pre></tt>';
         
+        
+        
+        //
+       $quatalst =  $this->quotation_model->get_lmit_quotation_for_payment();
+      // echo '<tt><pre>' . var_export($quatalst, TRUE) . '</pre></tt>';
+        
+        $data['quatatoinList'] = $quatalst;
         $this->load->view('calendar_veiw',$data);
-        
-        
       } else {
         //oops, invalid login
         $data['status']  = 'error';
-        $data['message'] = 'Invalid username or password.';
+        $data['message'] = '<p class="bg-danger">Invalid username or password.</p>';
         $this->load->view('user_view', $data);
       }
     } else {
+        
       //ooops, no username & password input found
       $data['status']  = 'error';
-      $data['message'] = 'Please enter a valid username and password.';
+      $data['message'] = '<p class="bg-danger">Please enter a valid username and password.';
       $this->load->view('user_view', $data); 
     }
   }

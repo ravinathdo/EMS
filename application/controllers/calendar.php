@@ -14,7 +14,14 @@ class Calendar extends CI_Controller {
     public function index() {
         //check user status
         if ($this->session->userdata('logged_id')) {
-            $this->load->view('calendar_veiw');
+
+            $this->load->model('event_model');
+            $data['activeEventList'] = $this->event_model->get_all_active_events('closed');
+            $quatalst = $this->quotation_model->get_lmit_quotation_for_payment();
+            // echo '<tt><pre>' . var_export($quatalst, TRUE) . '</pre></tt>';
+
+            $data['quatatoinList'] = $quatalst;
+            $this->load->view('calendar_veiw', $data);
         } else {
             //no direct access
             redirect(base_url() . 'index.php/login');

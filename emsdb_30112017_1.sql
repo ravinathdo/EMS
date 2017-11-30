@@ -37,16 +37,18 @@ insert  into `customer`(`id`,`name`,`address`,`tele`) values (1,'Saubash Ranawee
 DROP TABLE IF EXISTS `emp_event`;
 
 CREATE TABLE `emp_event` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` date DEFAULT NULL,
   `employee_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
+  `position_id` varchar(50) NOT NULL,
+  `event_date` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`employee_id`,`event_id`,`position_id`),
   KEY `fk_emp_team_employee1_idx` (`employee_id`),
   KEY `fk_emp_event_event1_idx` (`event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `emp_event` */
+
+insert  into `emp_event`(`employee_id`,`event_id`,`position_id`,`event_date`) values (1,1,'AUDIO_OPERATER','2017-01-01');
 
 /*Table structure for table `emp_position` */
 

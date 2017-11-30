@@ -80,7 +80,7 @@
                                                 <td><?= $rows->no_of_cams; ?></td>
                                                 <td><?= $rows->booked_or_not; ?></td>
                                                 <td><?= $rows->place; ?></td>
-                                                <td><a href="<?php echo base_url(); ?>team/teamForTheEvent/<?= $rows->id; ?>">Manage Team</a></td>
+                                                <td><a href="<?php echo base_url(); ?>team/loadTeamForTheEvent/<?= $rows->id; ?>/<?= $rows->event_date; ?>">Manage Team</a></td>
                                             </tr>
 
                                             <?php

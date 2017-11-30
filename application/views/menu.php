@@ -4,8 +4,8 @@
     <section class="sidebar">
         <!-- Sidebar user panel -->
 
-<?php echo base_url(); ?>
-      
+        <?php if ($this->session->userdata('user_type') == 'ADMIN') {
+            ?>
         <ul class="sidebar-menu">
 
             <li class="treeview">
@@ -30,8 +30,9 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url(); ?>event/add_new_event"><i class="fa fa-circle-o"></i> New Event</a></li>
-                    <!--<li><a href="<?php // echo base_url(); ?>event/index"><i class="fa fa-circle-o"></i> View Events</a></li>-->
+                    <li><a href="<?php echo base_url(); ?>event/add_new_event"><i class="fa fa-circle-o"></i> Manage Event</a></li>
+                    <li><a href="<?php echo base_url(); ?>event/loadStatusEventList"><i class="fa fa-circle-o"></i> Event Status</a></li>
+                    <!--<li><a href="<?php // echo base_url();  ?>event/index"><i class="fa fa-circle-o"></i> View Events</a></li>-->
                 </ul>
             </li>
 
@@ -45,8 +46,8 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="<?php echo base_url(); ?>payment/list_quatations"><i class="fa fa-circle-o"></i> List Quotations</a></li>
-<!--                    <li><a href="<?php // echo base_url(); ?>index.php/payment/add_new_payment"><i class="fa fa-circle-o"></i> New Payment</a></li>
-                    <li><a href="<?php // echo base_url(); ?>index.php/payment/index"><i class="fa fa-circle-o"></i> View Payments</a></li>-->
+<!--                    <li><a href="<?php // echo base_url();  ?>index.php/payment/add_new_payment"><i class="fa fa-circle-o"></i> New Payment</a></li>
+                    <li><a href="<?php // echo base_url();  ?>index.php/payment/index"><i class="fa fa-circle-o"></i> View Payments</a></li>-->
                 </ul>
             </li>
 
@@ -72,7 +73,7 @@
                 <ul class="treeview-menu">
                     <li><a href="<?php echo base_url(); ?>index.php/package/add_package"><i class="fa fa-circle-o"></i> New Package</a></li>
                     <li><a href="<?php echo base_url(); ?>index.php/package/index"><i class="fa fa-circle-o"></i> View Packages</a></li>
-                    <li><a href="<?php echo base_url(); ?>template/forms/advanced.html"><i class="fa fa-circle-o"></i> View Package Charges</a></li>
+                    <!--<li><a href="<?php // echo base_url();  ?>template/forms/advanced.html"><i class="fa fa-circle-o"></i> View Package Charges</a></li>-->
                 </ul>
             </li>
             <li class="treeview">
@@ -83,9 +84,9 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url(); ?>index.php/event/getBookedEventList"><i class="fa fa-circle-o"></i> List Booked Events </a></li>
-                    <li><a href="<?php echo base_url(); ?>index.php/event/get_event_id"><i class="fa fa-circle-o"></i> Assign Team</a></li>
-                    <li><a href="<?php echo base_url(); ?>template/tables/data.html"><i class="fa fa-circle-o"></i> View Teams</a></li>
+                    <li><a href="<?php echo base_url(); ?>index.php/event/getBookedEventList"><i class="fa fa-circle-o"></i> Manage Teams </a></li>
+<!--                    <li><a href="<?php // echo base_url();  ?>index.php/event/get_event_id"><i class="fa fa-circle-o"></i> Assign Team</a></li>
+                    <li><a href="<?php // echo base_url();  ?>template/tables/data.html"><i class="fa fa-circle-o"></i> View Teams</a></li>-->
                 </ul>
             </li>
 
@@ -116,28 +117,68 @@
                     <li><a href="<?php echo base_url(); ?>index.php/user/index"><i class="fa fa-circle-o"></i> View Users</a></li>
                 </ul>
             </li>
-            
+        </ul>
+        <?php
+        }
+        ?>
+
+
+        <?php if ($this->session->userdata('user_type') == 'EMPLOYEE') {
+          ?>
+        <ul class="sidebar-menu">
+
+           
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-laptop" aria-hidden="true"></i> <span>Quatation</span>
+                    <i class="fa fa-video-camera" aria-hidden="true"></i>
+                    <span>Event</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url(); ?>quotation_insertvieww"><i class="fa fa-circle-o"></i>Quata</a></li>
+                    <li><a href="<?php echo base_url(); ?>event/add_new_event_my"><i class="fa fa-circle-o"></i> My Event</a></li>
+                    <!--<li><a href="<?php // echo base_url();  ?>event/index"><i class="fa fa-circle-o"></i> View Events</a></li>-->
                 </ul>
             </li>
 
-            <li>
-                <a href="<?php echo base_url(); ?>template/mailbox/mailbox.html">
-                    <i class="fa fa-envelope"></i> <span>Mailbox</span>
+          
+            
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-table"></i> <span>Teams</span>
                     <span class="pull-right-container">
-                        <small class="label pull-right bg-yellow"></small>
-                        <small class="label pull-right bg-green"></small>
-                        <small class="label pull-right bg-red"></small>
+                        <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url(); ?>index.php/event/xx"><i class="fa fa-circle-o"></i> My Contribution </a></li>
+<!--                    <li><a href="<?php // echo base_url();  ?>index.php/event/get_event_id"><i class="fa fa-circle-o"></i> Assign Team</a></li>
+                    <li><a href="<?php // echo base_url();  ?>template/tables/data.html"><i class="fa fa-circle-o"></i> View Teams</a></li>-->
+                </ul>
             </li>
 
-            </aside>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-laptop" aria-hidden="true"></i> <span>Profile</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url(); ?>index.php/user/changePassword"><i class="fa fa-circle-o"></i> Change Password</a></li>
+                </ul>
+            </li>
+
+
+            
+        </ul>
+        <?php   
+        }
+        ?>
+
+
+
+        
+
+</aside>

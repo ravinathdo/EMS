@@ -18,9 +18,32 @@ class Event extends CI_Controller {
 
     public function getBookedEventList() {
         $data['eventList'] = $this->event_model->get_all_active_events_booked('booked');
-        $this->load->view('team_event_list',$data);
+        $this->load->view('team_event_list', $data);
+    }
+
+    public function loadStatusEventList() {
+        //it is valid login
+        //list all event list
+        $this->load->model('event_model');
+        $eventList = $this->event_model->get_all_events();
+        $data['eventList'] = $eventList;
+        //echo '<tt><pre>'.var_export($eventList, TRUE).'</pre></tt>';
+        $this->load->view('event_status', $data);
     }
     
+    public function changeStatusEvent($eid) { //closed 
+        //it is valid login
+        //list all event list
+        $this->load->model('event_model');
+        
+        $this->event_model->setEventStatusChange($eid);
+        $eventList = $this->event_model->get_all_events();
+        
+        $data['eventList'] = $eventList;
+        //echo '<tt><pre>'.var_export($eventList, TRUE).'</pre></tt>';
+        $this->load->view('event_status', $data);
+    }
+
     // View all the event details
     public function all_events() {
         //check user status
@@ -143,7 +166,7 @@ class Event extends CI_Controller {
 
                 if ($formData['no_of_cams'] <= $freCam) {
 
-                   // echo '<tt><pre>' . var_export($formData, TRUE) . '</pre></tt>';
+                    // echo '<tt><pre>' . var_export($formData, TRUE) . '</pre></tt>';
 
                     $event_id = $this->event_model->insert_event_to_db($formData);
 
@@ -178,8 +201,8 @@ class Event extends CI_Controller {
                     $eventList = $this->event_model->get_all_events();
                     $data['eventList'] = $eventList;
                     //echo '<tt><pre>'.var_export($eventList, TRUE).'</pre></tt>';
-                    
-                     $this->load->view('event_insertview', $data);
+
+                    $this->load->view('event_insertview', $data);
                 }
             } else {
                 //echo 'ssss';
