@@ -23,7 +23,7 @@ class Quotation_model extends CI_Model {
           INNER JOIN event
           ON quotation.event_id = event.id
          *  */
-        $this->db->select('quotation.*,event.event_name,event.booked_or_not,event.id AS eid');
+        $this->db->select('quotation.*,event.event_name,event.booked_or_not,event.id AS eid,event.status status');
         $this->db->from('quotation');
         $this->db->join('event','quotation.event_id = event.id');
         

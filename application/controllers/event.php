@@ -16,6 +16,11 @@ class Event extends CI_Controller {
         $this->load->model('quotation_model');
     }
 
+    public function getBookedEventList() {
+        $data['eventList'] = $this->event_model->get_all_active_events_booked('booked');
+        $this->load->view('team_event_list',$data);
+    }
+    
     // View all the event details
     public function all_events() {
         //check user status

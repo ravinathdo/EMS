@@ -15,7 +15,7 @@
             <tr>
                 <td>
                     <!--<h3>Video Event Management System </h3>-->
-                    <h3>Event Management System</h3>
+                    <h3>***</h3>
                 </td>
                 <td align="right" >
                       <i class="fa fa-user " aria-hidden="true">

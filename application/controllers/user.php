@@ -88,6 +88,11 @@ Class User extends CI_Controller {
     }
   }
 
+  
+  
+  public function userRegAuto($data) {
+      
+  }
 
 
   // Validate and store registration data in database

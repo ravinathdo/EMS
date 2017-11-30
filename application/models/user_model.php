@@ -5,6 +5,14 @@ Class User_model extends CI_Model {
 	//check if login data exists in db
 	
 
+        public function setAutoReg($data) {
+            $this->db->insert('user', $data);
+        }
+        
+        
+    
+    
+    
 	// Insert registration data in database
 	public function registration_insert($data) {
 		// Query to check whether username already exist or not

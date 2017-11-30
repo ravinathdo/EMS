@@ -51,6 +51,7 @@
                 <th>Discount</th>
                 <th>Total</th>
                 <th>Status</th>
+                <th></th>
             </tr>
         </thead>
         <tfoot>
@@ -62,6 +63,7 @@
                 <th>Discount</th>
                 <th>Total</th>
                 <th>Status</th>
+                <th></th>
             </tr>
         </tfoot>
         <tbody>
@@ -69,7 +71,7 @@
                 if ($quoList != FALSE) {
                     foreach ($quoList as $rows) {
                         ?>
-                        <tr>
+            <tr >
                             <td><?= $rows->id; ?></td>
                             <td><?= $rows->event_name; ?></td>
                             <td><?= $rows->camera_charges; ?></td>
@@ -77,10 +79,12 @@
                             <td><?= $rows->discount; ?></td>
                             <td><?= $rows->total; ?></td>
                             <td><?= $rows->booked_or_not; //event_id ?></td>
-                            <td><?php if($rows->booked_or_not != 'done'){ ?>
+                            <td><?php if($rows->status != 'payment done'){ ?>
                                 <a href="<?php echo base_url('payment/load_payment/'.$rows->id.'/'.$rows->eid);?>"> Next Payment</a>
                             <?php }else{
-                                echo 'payment completed';
+                                ?> 
+                              <a href="<?php echo base_url('payment/load_payment/'.$rows->id.'/'.$rows->eid);?>" class="btn btn-success btn-xs"  >Payment completed</a>
+                                <?php
                             } ?>
                             </td>
                         </tr>

@@ -12,6 +12,23 @@ class Payment_model extends CI_Model {
         return $query->result();
     }
 
+    public function updateEventBalance($eid, $balance) {
+        $status = "open";
+        if ($balance <= 0) {
+            $status = "payment done";
+        }
+        
+        //update the table 
+        $data = array(
+            'balance_amount' => $balance,
+            'status' => $status
+        );
+
+        $this->db->where('id', $eid);
+        $this->db->update('event', $data);
+        
+    }
+
     public function getQuotationPayment($qid) {
         $this->db->select('*');
         $this->db->from('payment');

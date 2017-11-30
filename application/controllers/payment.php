@@ -44,16 +44,20 @@ class Payment extends CI_Controller {
     }
 
     public function insert_newpayment_db() {
+        
+        
         $edata['quotation_id'] = $this->input->post('quotation_id');
         $edata['event_id'] = $this->input->post('event_id');
         $edata['payment'] = $this->input->post('payment');
 
         //find out the event form quotation_id
         $event = $this->quotation_model->getEventFromQuataionID($edata['quotation_id']);
-        echo '<tt><pre>'.var_export($event, TRUE).'</pre></tt>';
+        //echo '<tt><pre>'.var_export($event, TRUE).'</pre></tt>';
         if ($event) {
-            $balance = $event['balance_amount'] - $edata['payment'];
+            $balance = $event[0]->balance_amount - $edata['payment'];
             //update the balance 
+            $this->payment_model->updateEventBalance($edata['event_id'],$balance);
+            
         }else{
             echo 'Booked , Quatation Not found';
         }
@@ -61,7 +65,7 @@ class Payment extends CI_Controller {
         
         
         $res = $this->payment_model->insert_payment_db($edata);
-        echo '<tt><pre>' . var_export($res, TRUE) . '</pre></tt>';
+        //echo '<tt><pre>' . var_export($res, TRUE) . '</pre></tt>';
         if ($res) {
             
               //load payment history for quotation 
@@ -72,8 +76,9 @@ class Payment extends CI_Controller {
         $data['paymentHistory'] =  $this->payment_model->getQuotationPayment($edata['quotation_id']);
         
         $data['msg'] = '<p class="bg-success">Payment successful</p>';
-            $this->load->view('payment_insertview',$data);
-            // header('location:' . base_url() . "index.php/payment/" . $this->index());
+        $data['payamount'] = $edata['payment'];
+        $this->load->view('payment_insertview',$data);
+            //header('location:' . base_url() . "index.php/payment/" . $this->index());
         }
     }
 

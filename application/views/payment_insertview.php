@@ -46,31 +46,43 @@
                         <div class="col-md-5">
                             <h2>Payment Details Form</h2><br>
 
-                            <form method="post" action="<?php echo base_url('payment/insert_newpayment_db'); ?>">
-                                <input type="hidden" name="event_id" value="<?= $eventDetail['id']; ?>" />
-                                <table width="400" border="0" cellpadding="5">
+                            <?php
+                            if ($eventDetail['balance_amount'] <= 0) {
+                                ?> <span class="btn btn-primary btn-sm">Payment Completed</span>  <?php
+                            }
+                            ?>
 
-                                    <div class="form-group">
-                                        <label for="quotation_id">Quotation ID</label>
-                                        <input type="text" readonly="true" value="<?= $quoDetail['id']; ?>"  name="quotation_id"  class="form-control" />
-                                    </div>
+                            <div  <?php
+                            if ($eventDetail['balance_amount'] <= 0) {
+                                ?> style="display:none" <?php
+                                }
+                                ?> >
+                                <form method="post" action="<?php echo base_url('payment/insert_newpayment_db'); ?>">
+                                    <input type="hidden" name="event_id" value="<?= $eventDetail['id']; ?>" />
+                                    <table width="400" border="0" cellpadding="5">
 
-                                    <div class="form-group">
-                                        <label for="name" class="control-label">Pay Amount</label>
-                                        <input type="text" id="payment" name="payment" class="form-control" size="20" placeholder="amount" data-error="Enter a valied amount" required/>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
+                                        <div class="form-group">
+                                            <label for="quotation_id">Quotation ID</label>
+                                            <input type="text" readonly="true" value="<?= $quoDetail['id']; ?>"  name="quotation_id"  class="form-control" />
+                                        </div>
 
-                                    <tr>
-                                        <th align="right" scope="row">&nbsp;</th>
-                                        <td><input type="submit" name="submit" value="Pay" /></td>
-                                    </tr>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Pay Amount</label>
+                                            <input type="number" id="payment" name="payment" class="form-control" size="20" placeholder="amount" data-error="Enter a valied amount" required/>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
 
-                                </table>
-                            </form>
-                            <?php 
-                            if(isset($msg)){
-                                echo msg;
+                                        <tr>
+                                            <th align="right" scope="row">&nbsp;</th>
+                                            <td><input type="submit" name="submit" value="Pay" class="btn btn-primary" /></td>
+                                        </tr>
+
+                                    </table>
+                                </form>
+                            </div>
+                            <?php
+                            if (isset($msg)) {
+                                echo $msg;
                             }
                             ?>
 
@@ -101,20 +113,20 @@
                                                 <div class="form-group">
                                                     <label for="inputEmail3" class="col-sm-4 control-label">Event ID</label>
                                                     <div class="col-sm-8">
-                                                      <?= $eventDetail['id']; ?>
+                                                        <?= $eventDetail['id']; ?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="inputPassword3" class="col-sm-4 control-label">Event Name</label>
                                                     <div class="col-sm-8">
-                                                         <?= $eventDetail['event_name']; ?>
+                                                        <?= $eventDetail['event_name']; ?>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="form-group">
                                                     <label for="inputPassword3" class="col-sm-4 control-label">Event Date</label>
                                                     <div class="col-sm-8">
-                                                         <?= $eventDetail['event_date']; ?>
+                                                        <?= $eventDetail['event_date']; ?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -123,46 +135,47 @@
                                                         <h2>  <?= $eventDetail['balance_amount']; ?> </h2>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="form-group">
                                                     <label for="inputPassword3" class="col-sm-4 control-label"></label>
                                                     <div class="col-sm-8">
                                                         <span class="btn btn-default btn-lg">  <?= $eventDetail['booked_or_not']; ?> </span>
+                                                        <span class="btn btn-warning btn-sm">  <?= $eventDetail['status']; ?> </span>
                                                     </div>
                                                 </div>
-                                                
+
                                             </form>
                                         </td>
                                         <td> 
-<!--                                             'camera_charges' => '130000',
-  'other' => '1500',
-  'discount' => '122',
-  'total' => '131378.00',
-  'event_id' => '49',-->
+                                            <!--                                             'camera_charges' => '130000',
+                                              'other' => '1500',
+                                              'discount' => '122',
+                                              'total' => '131378.00',
+                                              'event_id' => '49',-->
                                             <form class="form-horizontal">
                                                 <div class="form-group">
                                                     <label for="inputEmail3" class="col-sm-4 control-label">Quotation ID</label>
                                                     <div class="col-sm-8">
-                                                      <?= $quoDetail['id']; ?>
+                                                        <?= $quoDetail['id']; ?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="inputPassword3" class="col-sm-4 control-label">Cam charges</label>
                                                     <div class="col-sm-8">
-                                                         <?= $quoDetail['camera_charges']; ?>
+                                                        <?= $quoDetail['camera_charges']; ?>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="form-group">
                                                     <label for="inputPassword3" class="col-sm-4 control-label">Other</label>
                                                     <div class="col-sm-8">
-                                                         <?= $quoDetail['other']; ?>
+                                                        <?= $quoDetail['other']; ?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="inputPassword3" class="col-sm-4 control-label">Discount</label>
                                                     <div class="col-sm-8">
-                                                         <?= $quoDetail['discount']; ?>
+                                                        <?= $quoDetail['discount']; ?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -171,50 +184,95 @@
                                                         <h2>  <?= $quoDetail['total']; ?></h2>
                                                     </div>
                                                 </div>
-                                                
+
                                             </form></td>
                                     </tr>
-                                    
+
                                 </tbody>
                             </table>
 
-<hr>
-
-<h3>Payment History</h3>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Receipt No</th>
-            <th>Amount</th>
-            <th>Date</th>
-        </tr>
-    </thead>
-   <tbody>
-                <?php
-                if ($paymentHistory != FALSE) {
-                    foreach ($paymentHistory as $rows) {
-                        ?>
-                        <tr>
-                            <td><?= $rows->id; ?></td>
-                            <td><?= $rows->payment; ?></td>
-                            <td><?= $rows->paydate; ?></td>
-                        </tr>
-
-                    <?php
-                    }
-                }
-                ?>
-        </tbody>
-</table>
-
-
+                            <hr>
                         </div>
                     </div>
 
+                    <?php
+
+                    function printNowTime() {
+                        date_default_timezone_set("Asia/Colombo");
+                        echo date("Y-m-d h:i:sa");
+                    }
+                    ?>
+                    <div class="row">
+                        <div class="col-md-8" id="PRINT">
+                            <?php if (isset($msg)) {
+                                ?>
+                                <div class="bs-example" data-example-id="block-btns"> 
+                                    <div class="well center-block" style="max-width:400px"> 
+                                        <button type="button" class="btn btn-primary btn-lg btn-block">Payment Receipt</button>
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <td>Event ID</td>
+                                                <td><?= $eventDetail['id']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Quatation ID</td>
+                                                <td><?= $quoDetail['id']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Amount</td>
+                                                <td><?= $payamount; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Date Time</td>
+                                                <td><?php printNowTime(); ?></td>
+                                            </tr>
+                                        </table>
+                                         <button onclick="printDiv('PRINT')">Print</button>
+                                    </div> 
+                                </div>
+                            <?php }
+                            ?>
+                        </div>
 
 
+                        <script type="text/javascript">
+                            function printDiv(divId) {
+                                var printContents = document.getElementById(divId).innerHTML;
+                                var originalContents = document.body.innerHTML;
+                                document.body.innerHTML = "<html><head><title></title></head><body>" + printContents + "</body>";
+                                window.print();
+                                document.body.innerHTML = originalContents;
+                            }
+                        </script>
+                        <div class="col-md-4">
+                            <h3>Payment History</h3>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Receipt No</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    if ($paymentHistory != FALSE) {
+                                        foreach ($paymentHistory as $rows) {
+                                            ?>
+                                            <tr>
+                                                <td><?= $rows->id; ?></td>
+                                                <td><?= $rows->payment; ?></td>
+                                                <td><?= $rows->paydate; ?></td>
+                                            </tr>
 
-
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </section>
                 <!-- /.content -->
             </div>

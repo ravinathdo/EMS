@@ -36,11 +36,28 @@ class Event_model extends CI_Model {
         $result = $query->result();
         return $result;
     }
+    
+    
+  
 
     public function get_all_active_events($status) {
+       // echo $status;
         $this->db->select('*');
         $this->db->from('event');
         $where = "booked_or_not != '.$status.'";
+        $this->db->where($where);
+        $this->db->order_by("id", "desc");
+        $query = $this->db->get();
+
+        $result = $query->result();
+        return $result;
+    }
+    public function get_all_active_events_booked($status) {
+       // echo $status;
+        $this->db->select('*');
+        $this->db->from('event');
+        $where = "booked_or_not = '".$status."'";
+//        echo $where;
         $this->db->where($where);
         $this->db->order_by("id", "desc");
         $query = $this->db->get();

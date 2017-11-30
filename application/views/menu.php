@@ -31,7 +31,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="<?php echo base_url(); ?>event/add_new_event"><i class="fa fa-circle-o"></i> New Event</a></li>
-                    <li><a href="<?php echo base_url(); ?>event/index"><i class="fa fa-circle-o"></i> View Events</a></li>
+                    <!--<li><a href="<?php // echo base_url(); ?>event/index"><i class="fa fa-circle-o"></i> View Events</a></li>-->
                 </ul>
             </li>
 
@@ -45,8 +45,8 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="<?php echo base_url(); ?>payment/list_quatations"><i class="fa fa-circle-o"></i> List Quotations</a></li>
-                    <li><a href="<?php echo base_url(); ?>index.php/payment/add_new_payment"><i class="fa fa-circle-o"></i> New Payment</a></li>
-                    <li><a href="<?php echo base_url(); ?>index.php/payment/index"><i class="fa fa-circle-o"></i> View Payments</a></li>
+<!--                    <li><a href="<?php // echo base_url(); ?>index.php/payment/add_new_payment"><i class="fa fa-circle-o"></i> New Payment</a></li>
+                    <li><a href="<?php // echo base_url(); ?>index.php/payment/index"><i class="fa fa-circle-o"></i> View Payments</a></li>-->
                 </ul>
             </li>
 
@@ -83,6 +83,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url(); ?>index.php/event/getBookedEventList"><i class="fa fa-circle-o"></i> List Booked Events </a></li>
                     <li><a href="<?php echo base_url(); ?>index.php/event/get_event_id"><i class="fa fa-circle-o"></i> Assign Team</a></li>
                     <li><a href="<?php echo base_url(); ?>template/tables/data.html"><i class="fa fa-circle-o"></i> View Teams</a></li>
                 </ul>

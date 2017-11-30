@@ -1,3 +1,8 @@
+-- before go 
+   Event Management System
+
+
+
 adm@gmail.com -> a
 
 https://www.rollapp.com
@@ -13,7 +18,7 @@ if ($this->session->userdata('userbean')) {
             }
 
  <div class="table-responsive">
-                                        <table class="table">
+                                   <table class="table">
                                             <thead>
                                                 <tr>
                                                     <th></th>
@@ -87,8 +92,8 @@ business_analyst - ba  - a [86f7e437faa5a7fce15d1ddcb9eaeaea377667b8]
 
 
 <div class="row">
-                        <div class="col-md-5"></div>
-                        <div class="col-md-7"></div>
+                        <div class="col-md-5">5</div>
+                        <div class="col-md-7">7</div>
                     </div>
 =====================
 
@@ -106,3 +111,14 @@ $this->db->select('*');
   }
 
 ==================
+
+
+
+
+ function printNowTime() {
+                        date_default_timezone_set("Asia/Colombo");
+                        echo date("Y-m-d h:i:sa");
+                    }
+
+
+
