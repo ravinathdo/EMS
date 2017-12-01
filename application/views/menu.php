@@ -98,23 +98,23 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url(); ?>index.php/user/user_registration_show"><i class="fa fa-circle-o"></i> New User</a></li>
-                    <li><a href="<?php echo base_url(); ?>index.php/user/index"><i class="fa fa-circle-o"></i> View Users</a></li>
+                    <li><a href="<?php echo base_url(); ?>index.php/user/loadChangePassword"><i class="fa fa-circle-o"></i>Change Password</a></li>
+                    <!--<li><a href="<?php // echo base_url(); ?>index.php/user/index"><i class="fa fa-circle-o"></i> View Users</a></li>-->
                 </ul>
             </li>
 
 
             <li class="treeview">
-                <a href="#">
+                <a href="">
                     <i class="fa fa-laptop" aria-hidden="true"></i> <span>Reports</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url(); ?>index.php/report/load_report_view"><i class="fa fa-circle-o"></i>Reports</a></li>
-                    <li><a href="<?php echo base_url(); ?>index.php/report/load_customer_event_report"><i class="fa fa-circle-o"></i>Customer event list</a></li>
-                    <li><a href="<?php echo base_url(); ?>index.php/user/index"><i class="fa fa-circle-o"></i> View Users</a></li>
+                    <li><a href="<?php echo base_url(); ?>index.php/report/loadEventReport"><i class="fa fa-circle-o"></i>Event Reports</a></li>
+                    <li><a href="<?php echo base_url(); ?>index.php/report/loadEmployeeEvent"><i class="fa fa-circle-o"></i>Employee Event</a></li>
+                    <!--<li><a href="<?php // echo base_url(); ?>index.php/user/index"><i class="fa fa-circle-o"></i> View Users</a></li>-->
                 </ul>
             </li>
         </ul>
@@ -137,14 +137,14 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url(); ?>event/add_new_event_my"><i class="fa fa-circle-o"></i> My Event</a></li>
+                    <li><a href="<?php echo base_url(); ?>report/employeeIndividualEvent"><i class="fa fa-circle-o"></i> My Event</a></li>
                     <!--<li><a href="<?php // echo base_url();  ?>event/index"><i class="fa fa-circle-o"></i> View Events</a></li>-->
                 </ul>
             </li>
 
           
             
-            <li class="treeview">
+<!--            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-table"></i> <span>Teams</span>
                     <span class="pull-right-container">
@@ -152,11 +152,11 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url(); ?>index.php/event/xx"><i class="fa fa-circle-o"></i> My Contribution </a></li>
-<!--                    <li><a href="<?php // echo base_url();  ?>index.php/event/get_event_id"><i class="fa fa-circle-o"></i> Assign Team</a></li>
-                    <li><a href="<?php // echo base_url();  ?>template/tables/data.html"><i class="fa fa-circle-o"></i> View Teams</a></li>-->
+                    <li><a href="<?php // echo base_url(); ?>index.php/event/xx"><i class="fa fa-circle-o"></i> My Contribution </a></li>
+                    <li><a href="<?php // echo base_url();  ?>index.php/event/get_event_id"><i class="fa fa-circle-o"></i> Assign Team</a></li>
+                    <li><a href="<?php // echo base_url();  ?>template/tables/data.html"><i class="fa fa-circle-o"></i> View Teams</a></li>
                 </ul>
-            </li>
+            </li>-->
 
             <li class="treeview">
                 <a href="#">

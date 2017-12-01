@@ -59,6 +59,7 @@
 
 
 
+                <?php if($this->session->userdata('user_type')=='ADMIN') { ?>
                 <section class="col-lg-3 connectedSortable ui-sortable">
                     <br>
                     <!--<img src="<?php //echo base_url();  ?>/assets/images/Videos-1-icon.png" alt="" style="width: 100px;height: 100px"/>-->
@@ -86,7 +87,6 @@
                                         <th scope="row"><?= $rows->id?></th>
                                         <td><?= $rows->eid?></td>
                                         <td><a class="btn btn-primary btn-xs" href="<?php echo base_url('payment/load_payment/'.$rows->id.'/'.$rows->eid);?>"> <?= $rows->total;?></a>
-
                                     </tr>
                                     <?php }
                             }
@@ -95,7 +95,7 @@
                         </tbody>
                     </table>
                 </section>
-
+                <?php } ?>
 
 
 
@@ -155,8 +155,7 @@ if ($activeEventList != FALSE) {
 
                                 {
                                     title: '[<?php echo $rows->id; ?>] <?php echo $rows->event_name; ?>  ',
-                                    start: '<?php echo $rows->event_date; ?>',
-                                    url: 'http://google.com/',
+                                    start: '<?php echo $rows->event_date; ?>'
                                 },
         <?php
     }

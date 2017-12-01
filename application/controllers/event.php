@@ -14,6 +14,7 @@ class Event extends CI_Controller {
         $this->load->model('emp_position_model');
         $this->load->model('emp_event_model');
         $this->load->model('quotation_model');
+        $this->load->model('SMS_Model');
     }
 
     public function getBookedEventList() {
@@ -30,15 +31,15 @@ class Event extends CI_Controller {
         //echo '<tt><pre>'.var_export($eventList, TRUE).'</pre></tt>';
         $this->load->view('event_status', $data);
     }
-    
+
     public function changeStatusEvent($eid) { //closed 
         //it is valid login
         //list all event list
         $this->load->model('event_model');
-        
+
         $this->event_model->setEventStatusChange($eid);
         $eventList = $this->event_model->get_all_events();
-        
+
         $data['eventList'] = $eventList;
         //echo '<tt><pre>'.var_export($eventList, TRUE).'</pre></tt>';
         $this->load->view('event_status', $data);
@@ -128,6 +129,11 @@ class Event extends CI_Controller {
                 'package_id', 'no_of_cams'));
 
 
+
+            $customer_data = explode("|", $formData['customer_id']);
+            $formData['customer_id'] = $customer_data[0];
+            $tele = $customer_data[1];
+
             // echo 'xxx';
             //validate date-time
             $dtTimeFlag = $this->validateDateTime($formData['event_date'], $formData['starting_time'], $formData['end_time']);
@@ -182,13 +188,22 @@ class Event extends CI_Controller {
                     $data['event_id'] = $event_id;
 
 
+
+                    //SMS out
+
+                    $sms = array("sender" => $this->SMS_Model->getSMS_SENDER(),
+                        "receiver" => $tele,
+                        "msg" => $this->SMS_Model->getSMS_EVENT_CREATION());
+                    $this->SMS_Model->sendSMS($sms);
+
+
                     //echo '<tt><pre>' . var_export($data, TRUE) . '</pre></tt>';
 
                     $this->load->view('quotation_insertview', $data);
                 } else {
                     //echo 'ssss';
                     //invalid from date and to date
-                    $data['msg'] = '<p class="bg-danger">Sorry Package cam exceeded</p>';
+                    $data['msg'] = '<p class="bg-danger">Sorry Package cam exceeded, Remains  ' . $freCam . '</p>';
 
 
                     $date = $this->uri->segment(3);
@@ -229,6 +244,18 @@ class Event extends CI_Controller {
             //no direct access
             redirect(base_url() . 'index.php/login');
         }
+    }
+
+    public function loadBookNow($eid) {
+
+        $eventData = $this->event_model->bookNow($eid);
+        //echo '<tt><pre>' . var_export($eventData, TRUE) . '</pre></tt>';
+        $data['package_name'] = $eventData[0]->package;
+        $data['no_of_cams'] = $eventData[0]->no_of_cams;
+        $data['camera_charges'] = $eventData[0]->charge_per_cam * $eventData[0]->no_of_cams;
+        $data['event_id'] = $eventData[0]->id;
+        
+        $this->load->view('quotation_insertview', $data);
     }
 
     function getTime($ymd, $hi) {

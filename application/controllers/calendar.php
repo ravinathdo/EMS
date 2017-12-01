@@ -8,7 +8,9 @@ class Calendar extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('event_model');
+        $this->load->model('quotation_model');
         $this->load->model('package_model');
+        $this->load->model('report_model');
     }
 
     public function index() {
@@ -16,11 +18,24 @@ class Calendar extends CI_Controller {
         if ($this->session->userdata('logged_id')) {
 
             $this->load->model('event_model');
-            $data['activeEventList'] = $this->event_model->get_all_active_events('closed');
-            $quatalst = $this->quotation_model->get_lmit_quotation_for_payment();
-            // echo '<tt><pre>' . var_export($quatalst, TRUE) . '</pre></tt>';
 
+
+
+            if ($this->session->userdata('user_type') == 'ADMIN') {
+                $data['activeEventList'] = $this->event_model->get_all_active_events('closed');
+            }
+            if ($this->session->userdata('user_type') == 'EMPLOYEE') {
+                $eid = $this->session->userdata('userid');
+                //echo '<tt><pre>' . var_export($eid, TRUE) . '</pre></tt>';
+                $data['activeEventList'] = $this->report_model->getEmployeeEvent($eid);
+            }
+
+            $quatalst = $this->quotation_model->get_lmit_quotation_for_payment();
             $data['quatatoinList'] = $quatalst;
+
+
+
+
             $this->load->view('calendar_veiw', $data);
         } else {
             //no direct access

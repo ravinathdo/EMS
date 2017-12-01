@@ -3,7 +3,7 @@ class Customer_model extends CI_Model{
 		
 		function __construct(){
 			parent::__construct();
-			$this->load->database("mydb");
+			$this->load->database("emsdb");
 		}
 
 public function get_all_customer()

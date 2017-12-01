@@ -43,156 +43,43 @@
                 <!-- Main content -->
                 <section class="content">
 
-                    <h2>Event Creation</h2><br>
-<?php if(isset($msg)){
-     echo $msg;
-}?>
-                    <?php echo form_open('event/insert_newevent_db'); ?>
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
 
-
+                            <?php echo form_open('user/changePassword') ?>
                             <div class="form-group">
-                                <label for="name" class="control-label">Event Date</label>
-                                <input type="date" id="date" name="event_date" class="form-control"  required/>
+                                <label for="exampleInputEmail1">Current Password</label>
+                                <input required="" type="password" name="currentpass" class="form-control" id="exampleInputEmail1">
                             </div>
-
-
-
                             <div class="form-group">
-                                <label for="customer_id">Customer Name</label>
-                                <select class="form-control" id="customer_id" name="customer_id">
-                                    <option value="0" disabled selected>--Select Customer--</option>
-                                    <?php foreach ($customers as $customer) { ?>
-                                        <option value = "<?php echo $customer->id; ?>|<?php echo $customer->tele; ?>"><?php echo $customer->name; ?></option>
-                                    <?php } ?> 
-                                </select>
+                                <label for="exampleInputPassword1">New Password</label>
+                                <input required="" type="password" name="newpass" class="form-control" id="exampleInputPassword1" >
                             </div>
-
                             <div class="form-group">
-                                <label for="name" class="control-label">Event Name</label>
-                                <input type="text" id="event_name" name="event_name" class="form-control" size="20" placeholder="Enter Your Event Name" required/>
+                                <label for="exampleInputPassword1">Retype Password</label>
+                                <input required="" type="password" name="retypepass" class="form-control" id="exampleInputPassword1" >
                             </div>
-
-
-
                             <div class="form-group">
-                                <label for="name" class="control-label">Place</label>
-                                <input type="text" id="place" name="place" class="form-control" size="20" placeholder="Enter Event Address" data-error="Enteravalied address" required/>
+                                <label for="exampleInputPassword1"></label>
+                                <button type="submit" class="btn btn-default">Change Password</button>
                             </div>
+                            <?php echo form_close() ?>
 
-
-
-
+                            <?php
+                            if (isset($msg)) {
+                                echo $msg;
+                            }
+                            ?>
 
                         </div>
-
-                        <div class="col-md-7">
-
-                            <table class="table table-bordered" style="width:50%">
-                                <tr>
-                                    <td><label for="customer_id">Starting Time</label></td>
-                                    <td> <input type="time" name="starting_time" required=""/></td>
-                                </tr>
-                                <tr>
-                                    <td><label for="customer_id">End Time</label></td>
-                                    <td> <input type="time" name="end_time" required=""/></td>
-                                </tr>
-                            </table>
-
-
-
-
-
-
-                            <div class="form-group">
-                                <label for="customer_id">Package</label>
-                                <select class="form-control" id="package_package" name="package_id">
-                                    <option value="0" disabled selected>--Select Package--</option>
-                                    <?php foreach ($packages as $package) { ?>
-                                        <option value = "<?php echo $package->id; ?>|<?php echo $package->charge_per_cam; ?>|<?php echo $package->package; ?>|<?php echo $package->no_of_cameras; ?>"><?php echo $package->package; ?></option>
-                                    <?php } ?> 
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="no_of_cams" class="control-label">Number of Cameras</label>
-                                <input type="text" id="no_of_cams" name="no_of_cams" class="form-control" size="20" placeholder="Enter Number of Cameras" data-error="Enteravalied address" required/>
-                            </div>
-
-                            <div class="form-group">
-                                <button type="submit" id="btn1" class="btn btn-primary">Create Event</button>
-                            </div>
-
-                        </div>
+                        <div class="col-md-4"></div>
                     </div>
-                    <?php echo form_close(); ?>
 
 
 
                 </section>
                 <!-- /.content -->
-
-
-                <!--event-list-->
-                <div class="row">
-                    <div class="col-md-12">
-                        <table id="example" class="display" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                  <th>Event ID</th>
-                                    <th>Date-Time</th>
-                                    <th>Event Name</th>
-                                    <th>Place</th>
-                                    <th>No of cams</th>
-                                    <th>Status</th>
-                                    <th>Timecreated</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Event ID</th>
-                                    <th>Date-Time</th>
-                                    <th>Event Name</th>
-                                    <th>Place</th>
-                                    <th>No of cams</th>
-                                    <th>Status</th>
-                                    <th>Timecreated</th>
-
-                                </tr>
-                            </tfoot>
-                            <tbody>
-
-                                <?php
-                                if ($eventList != FALSE) {
-                                    foreach ($eventList as $rows) {
-                                        ?>
-                                        <tr>
-                                            <td><?= $rows->id; ?></td>
-                                            <td><?= $rows->event_date; ?> [
-                                                <?= $rows->starting_time; ?> to <?= $rows->end_time; ?>]</td>
-                                            <td><?= $rows->event_name; ?></td>
-                                            <td><?= $rows->place; ?></td>
-                                            <td><?= $rows->no_of_cams; ?></td>
-                                            <td><?php if($rows->booked_or_not == 'pending'){ ?>
-                                                <a href="<?php echo base_url()?>event/loadBookNow/<?= $rows->id; ?>" class="btn btn-warning btn-xs">pending</a>
-                                            <?php }else{
-                                                echo $rows->booked_or_not;
-                                            }  ?></td>
-                                            <td><?= $rows->timecreated; ?></td>
-                                        </tr>
-
-                                        <?php
-                                    }
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- /.event-list-->
-
-
             </div>
             <!-- /.content-wrapper -->
 
@@ -229,12 +116,6 @@
     <?php include 'application/views/footer.php' ?>
 
 
-    <script src="<?php echo base_url(); ?>js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#example').DataTable();
-        });
-    </script>
 
 
     <script type="text/javascript">

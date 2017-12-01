@@ -25,7 +25,7 @@ class Customer extends CI_Controller {
 
     public function add_new_customer() {
         //check user status
-        if ($this->session->userdata('logged_id')) {
+        if ($this->session->userdata('user_type')== 'ADMIN') {
             //it is valid login
 
             

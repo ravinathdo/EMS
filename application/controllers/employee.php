@@ -93,7 +93,8 @@ class Employee extends CI_Controller {
             $txt = "User email same as the password for first use";
             $headers = "From: info@ems.com";
 
-            mail($to, $subject, $txt, $headers);
+            //Email code worke in server host
+            // mail($to, $subject, $txt, $headers);
             
             
 
@@ -101,12 +102,13 @@ class Employee extends CI_Controller {
             $data['msg'] = '<p class="bg-success">New employee created</p>';
         } else {
             //duplicate entry found
-            $posiList = $this->employee_model->getPositionList();
-            $data['posiList'] = $posiList;
+            
 
             $data['msg'] = '<p class="bg-danger">Invalid Input or Duplicate Employee Data Found</p>';
         }
 
+        $posiList = $this->employee_model->getPositionList();
+            $data['posiList'] = $posiList;
             $this->load->view('employee_insertview', $data);
 
 //        if ($res) {

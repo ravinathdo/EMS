@@ -14,12 +14,48 @@ Class User extends CI_Controller {
     $this->load->model('user_model');
     $this->load->model('employee_model');
     $this->load->model('quotation_model');
+    $this->load->model('report_model');
   }
 
   // Show login page
   public function index() {
 //      $this->load->view('user_view');
       $this->load->view('index');
+    }
+    
+    
+    public function loadChangePassword() {
+        $this->load->view('change_password');
+    }
+    
+    
+    public function changePassword() {
+        //get input data
+        $inputData = $this->user_model->array_from_post(array('currentpass', 'newpass', 'retypepass'));
+        $data = array();
+        $newPW = $inputData['newpass'];
+        
+        if(strlen($newPW) >= 8){
+            if ($inputData['newpass'] == $inputData['retypepass']) {
+            $result = $this->user_model->setPasswordChange($inputData);
+            if ($result) {
+                $this->user_model->updatePassword($inputData['newpass']);
+                $data['msg'] = '<p class="bg-success">Password Changed Please Login</p>';
+            } else {
+                //  echo 'Data Not Found';
+            }
+        } else {
+            $data['msg'] = '<p class="bg-danger">Invalid Data</p>';
+        }
+        }else{
+            $data['msg'] = '<p class="bg-danger">Password legth should atleaset 8 characters</p>';
+        }
+        
+        
+        
+        
+        //echo '<tt><pre>' . var_export($data, TRUE) . '</pre></tt>';
+        $this->load->view('change_password', $data);
     }
   
     
@@ -74,7 +110,14 @@ Class User extends CI_Controller {
         
         //search all event list 
         $this->load->model('event_model');
-        $data['activeEventList'] = $this->event_model->get_all_active_events('closed');
+        if ($this->session->userdata('user_type') == 'ADMIN') {
+                $data['activeEventList'] = $this->event_model->get_all_active_events('closed');
+            }
+            if ($this->session->userdata('user_type') == 'EMPLOYEE') {
+                $eid = $this->session->userdata('userid');
+                //echo '<tt><pre>' . var_export($eid, TRUE) . '</pre></tt>';
+                $data['activeEventList'] = $this->report_model->getEmployeeEvent($eid);
+            }
         //load latest 10 quatations 
         
         //echo '<tt><pre>'.var_export($data['activeEventList'], TRUE).'</pre></tt>';

@@ -83,10 +83,10 @@
         </td>
 
       <td width="40%" align="left" >
-        <a class="btn btn-primary" href="#" onClick="show_confirm('delete',<?php echo $p_key->id;?>)" aria-label="Delete">
+<!--        <a class="btn btn-primary" href="#" onClick="show_confirm('delete',<?php echo $p_key->id;?>)" aria-label="Delete">
         <i class="fa fa-trash-o" aria-hidden="true">
         </i>
-        </a>
+        </a>-->
       </td>
 
       </tr>

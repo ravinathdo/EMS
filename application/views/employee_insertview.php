@@ -39,14 +39,6 @@
                     <h2>Employee Details</h2><br>
 
 
-
-
-
-
-
-
-
-
                     <form method="post" action="<?php echo base_url(); ?>employee/insert_newemployee_db">
                         <div class="row">
                             <?php 
@@ -63,20 +55,20 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name" class="control-label">NID</label>
-                                    <input type="text" id="nid" name="nid" class="form-control" size="20" placeholder="Employee NID" data-error="Enter a valied NID" required/>
+                                    <label for="name" class="control-label">NID (without 'V')</label>
+                                    <input type="number" id="nid" name="nid" class="form-control" size="20" placeholder="Employee NID" data-error="Enter a valied NID" required/>
                                     <div class="help-block with-errors"></div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name" class="control-label">Date of Birth</label>
-                                    <input type="text" id="dob" name="dob" class="form-control" size="20" placeholder="Date of Birth" data-error="Enter a valied Date" required/>
+                                    <input type="date" id="dob" name="dob" class="form-control" size="20" placeholder="Date of Birth" data-error="Enter a valied Date" required/>
                                     <div class="help-block with-errors"></div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="name" class="control-label">Gender</label>
-                                    <input type="radio" name="gender" value="MALE" /> MALE
+                                    <input type="radio" name="gender" value="MALE" checked=""/> MALE
                                     <input type="radio" name="gender" value="FEMALE" /> FEMALE
                                     <div class="help-block with-errors"></div>
                                 </div>
@@ -92,7 +84,7 @@
                             <div class="col-md-7"> 
                                 <div class="form-group">
                                     <label for="name" class="control-label">Employee Contact no</label>
-                                    <input type="text" id="contact_no" name="contact_no" class="form-control" size="20" placeholder="Employee contact no" data-error="Enter a valied contact no" required/>
+                                    <input type="number" id="contact_no" name="contact_no" class="form-control" size="20" placeholder="Employee contact no" data-error="Enter a valied contact no" required/>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
@@ -114,7 +106,7 @@
 
 
 
-                                <input type="submit" name="submit" value="Submit" />
+                                <input type="submit" name="submit" value="Submit" class="btn btn-primary" />
                             </div>
                         </div>
                     </form>

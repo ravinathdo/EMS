@@ -53,7 +53,7 @@
 
                                 <div class="form-group">
                                     <label for="name" class="control-label">Contact number</label>
-                                    <input type="text" pattern="^[0-9]+$" id="tele" name="tele" class="form-control required number" minlength="10" maxlength="12" placeholder="Enter your Contact number" data-error="Enter a valied telephone number" required/>
+                                    <input type="number"  id="tele" name="tele" class="form-control required number" minlength="10" maxlength="12" placeholder="Enter your Contact number" data-error="Enter a valied telephone number" required/>
                                     <div class="help-block with-errors"></div>
                                 </div>
 

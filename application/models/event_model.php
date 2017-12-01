@@ -13,11 +13,31 @@ class Event_model extends CI_Model {
         return $Event;
     }
 
+    public function bookNow($eid) {
+        /*
+          SELECT * FROM event
+          INNER JOIN package
+          ON event.package_id = package.id
+          WHERE event.id = 3
+         *          */
+        $this->db->select('*');
+        $this->db->from('event');
+        $this->db->join('package', 'event.package_id = package.id');
+        $this->db->where("event.id", $eid);
+        $query = $this->db->get();
+        
+        $result = $query->result();
+        if ($result) {
+            return $result;
+        } else {
+            return FALSE;
+        }
+    }
+
     public function setEventStatusChange($eid) {
         $this->db->set('booked_or_not', 'closed');
         $this->db->where('id', $eid);
         $this->db->update('event');
-        
     }
 
     public function array_from_post($fields) {
