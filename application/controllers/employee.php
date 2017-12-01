@@ -67,7 +67,7 @@ class Employee extends CI_Controller {
         if ($employee_id != 0) {
 
             $check_list = $this->input->post('position');
-            echo '<tt><pre>' . var_export($check_list, TRUE) . '</pre></tt>';
+           // echo '<tt><pre>' . var_export($check_list, TRUE) . '</pre></tt>';
             foreach ($check_list as $select) {
                 $data = array(
                     'employee_id' => $employee_id,

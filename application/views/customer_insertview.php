@@ -33,7 +33,11 @@
                 <section class="content">
 
                     <h2>Customer Details Form</h2><br>
-
+                    <?php
+                    if(isset($msg)){
+                        echo $msg;
+                    }
+                    ?>
                     <div class="row">
                         <div class="col-md-5"><form data-toggle="validator" role="form" id="new_customer_form" method="post" action="<?php echo base_url(); ?>customer/insert_newcustomer_db" >
 
@@ -69,7 +73,7 @@
                             <table id="example" class="display" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
+                                        <th>#ID</th>
                                         <th>Name</th>
                                         <th>Address</th>
                                         <th>Telephone</th>
@@ -78,7 +82,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Name</th>
+                                        <th>#ID</th>
                                         <th>Name</th>
                                         <th>Address</th>
                                         <th>Telephone</th>

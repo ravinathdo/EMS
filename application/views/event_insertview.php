@@ -117,7 +117,7 @@
 
                             <div class="form-group">
                                 <label for="no_of_cams" class="control-label">Number of Cameras</label>
-                                <input type="text" id="no_of_cams" name="no_of_cams" class="form-control" size="20" placeholder="Enter Number of Cameras" data-error="Enteravalied address" required/>
+                                <input type="number" id="no_of_cams" name="no_of_cams" class="form-control" size="20" placeholder="Enter Number of Cameras" data-error="Enteravalied address" required/>
                             </div>
 
                             <div class="form-group">

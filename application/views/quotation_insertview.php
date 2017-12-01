@@ -68,13 +68,13 @@
                             <div class="form-group">
                                 <label for="inputPassword3" class="col-sm-4 control-label">Other Charges</label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="other" class="form-control" id="inputEmail3" ng-model="other"   ng-change="calValue()">
+                                    <input type="number" name="other" class="form-control" id="inputEmail3" ng-model="other"   ng-change="calValue()">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputPassword3" class="col-sm-4 control-label">Discount</label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="discount" class="form-control" id="inputEmail3" ng-model="discount" ng-change="calValue()" >
+                                    <input type="number" name="discount" class="form-control" id="inputEmail3" ng-model="discount" ng-change="calValue()" >
                                 </div>
                             </div>
                             <div class="form-group">
@@ -86,7 +86,7 @@
                             <div class="form-group">
                                 <label for="inputPassword3" class="col-sm-4 control-label">Pay Amount</label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="pay_amount"  class="form-control" id="inputEmail3" ng-model="pay_amount"  >
+                                    <input type="number" name="pay_amount"  class="form-control" id="inputEmail3" ng-model="pay_amount"  >
                                 </div>
                             </div>
                             <div class="form-group">

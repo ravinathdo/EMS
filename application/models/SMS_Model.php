@@ -11,11 +11,12 @@
  *
  * @author User
  */
+
 class SMS_Model extends CI_Model {
 
     public $SMS_SENDER = "0711111111";
-    public static $SMS_EVENT_CREATION = "New event created";
-    public static $SMS_PAYMENT_REMINDER = "Payment Reminder";
+    public  $SMS_EVENT_CREATION = "New event created";
+    public  $SMS_PAYMENT_REMINDER = "Payment Reminder";
 
     public function getSMS_SENDER() {
         return $this->SMS_SENDER;
