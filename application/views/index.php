@@ -45,7 +45,7 @@ Smart phone Compatible web template, free webdesigns for Nokia, Samsung, LG, Son
 				<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
 					<nav class="menu menu--iris">
 						<ul class="nav navbar-nav menu__list">
-							<li class="menu__item menu__item--current"><a href="index.html" class="menu__link">Home</a></li>
+							<li class="menu__item menu__item--current"><a href="#" class="menu__link">Home</a></li>
 							<li class="menu__item"><a href="#about" class="menu__link scroll">About</a></li>
 							<li class="menu__item"><a href="#gallery" class="menu__link scroll">My Photos</a></li>
 							<li class="menu__item"><a href="#contact" class="menu__link scroll">Contact </a></li>
